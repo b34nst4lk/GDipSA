@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA4102", "ConsoleApp1\SA4102.csproj", "{E66442EF-76C5-4CF8-81D0-B832E751B5A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA4102", "FundamentalsOfProgramming\SA4102.csproj", "{E66442EF-76C5-4CF8-81D0-B832E751B5A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

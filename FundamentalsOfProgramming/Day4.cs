@@ -206,38 +206,50 @@ namespace Workshop
             }
 
             // reset arrays and sort both arrays based on key array
+            Console.WriteLine("\nAttempt to sort");
             name = new string[7] { "Bob", "Alice", "Eli", "Gina", "Charlie", "Dennis", "Frank" };
             score = new int[7] { 90, 100, 76, 88, 120, 80, 66 };
             string tempName;
             int tempScore;
             int pos;
 
-            for (int i=0; i<name.Length - 2; i++)
+            for (int i=0; i < name.Length - 1; i++)
             {
                 tempName = name[i];
                 tempScore = score[i];
-                for (int j=+1; j < name.Length-1; j++)
-                {
-                    pos = i;
+                pos = i;
 
+                for (int j = i+1; j < name.Length; j++)
+                {
                     // Check for position to swap with
-                    if (tempName.CompareTo(name[j]) == -1)
+                    if (tempName.CompareTo(name[j]) == 1)
                     {
                         pos = j;
                         tempName = name[j];
                         tempScore = score[j];
                     }
+                }
+                
+                // swap if required
+                if (pos != i)
+                {
+                    name[pos] = name[i];
+                    score[pos] = score[i];
+                    name[i] = tempName;
+                    score[i] = tempScore;
+                }
 
-                    // swap if required
-                    if (pos != i)
-                    {
-                        name[j] = name[i];
-                        score[j] = score[i];
-                        name[i] = tempName;
-                        score[j] = tempScore;
-                    }
-                } 
+                // Print output of sort after each iteration
+                Console.WriteLine(string.Join(",", name));
             }
+
+
+            for (int i=0; i<name.Length; i++)
+            {
+                Console.WriteLine("{0}\t{1}", name[i], score[i]);
+            }
+
+
         }
 
         public static void Q8()

@@ -204,6 +204,40 @@ namespace Workshop
             {
                 Console.WriteLine("{0}\t{1}", name[i], score[i]);
             }
+
+            // reset arrays and sort both arrays based on key array
+            name = new string[7] { "Bob", "Alice", "Eli", "Gina", "Charlie", "Dennis", "Frank" };
+            score = new int[7] { 90, 100, 76, 88, 120, 80, 66 };
+            string tempName;
+            int tempScore;
+            int pos;
+
+            for (int i=0; i<name.Length - 2; i++)
+            {
+                tempName = name[i];
+                tempScore = score[i];
+                for (int j=+1; j < name.Length-1; j++)
+                {
+                    pos = i;
+
+                    // Check for position to swap with
+                    if (tempName.CompareTo(name[j]) == -1)
+                    {
+                        pos = j;
+                        tempName = name[j];
+                        tempScore = score[j];
+                    }
+
+                    // swap if required
+                    if (pos != i)
+                    {
+                        name[j] = name[i];
+                        score[j] = score[i];
+                        name[i] = tempName;
+                        score[j] = tempScore;
+                    }
+                } 
+            }
         }
 
         public static void Q8()
@@ -357,6 +391,7 @@ namespace Workshop
             double temp;
             int pos, finalPos = inputArr.Length - 1;
             
+            // sort ascending
             for (int i = 0; i <= finalPos - 1; i++)
             {
                 temp = inputArr[i];
@@ -373,6 +408,7 @@ namespace Workshop
                 inputArr[i] = temp;
             }
 
+            // flip array if descending is true
             if (descending)
             {
                 double[] tempArr = new double[finalPos+1];
@@ -385,5 +421,6 @@ namespace Workshop
             }
             return inputArr;
         }
+
     }
 }

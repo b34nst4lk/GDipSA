@@ -53,6 +53,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Day1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SectionV.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

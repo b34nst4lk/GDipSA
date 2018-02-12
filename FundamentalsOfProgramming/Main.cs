@@ -24,20 +24,33 @@ namespace Workshop
 
         static void GetAndRunExercise()
         {
+            Type t;
+            MethodInfo method = null;
+            string classToCall = "";
+            string methodToCall = "";
+            bool isValidMethod = false;
+
             // Asks user which section and question number to run
-            Console.WriteLine("Please enter the Section alphabet");
-            string exercise = Console.ReadLine().ToUpper();
-            Console.WriteLine("Please enter the question number");
-            string question = Console.ReadLine();
+            while (!isValidMethod)
+            {
+                Console.WriteLine("Please enter the Section alphabet");
+                string exercise = Console.ReadLine().ToUpper();
+                Console.WriteLine("Please enter the question number");
+                string question = Console.ReadLine();
 
-            string classToCall = "Workshop.Section" + exercise;
-            string methodToCall = "Q" + question;
+                classToCall = "Workshop.Section" + exercise;
+                methodToCall = "Q" + question;
 
-            // Get the class and method to call
-            Type t = Type.GetType(classToCall);
-            MethodInfo method = t.GetMethod(methodToCall, BindingFlags.Public | BindingFlags.Static);
+                // Get the class and method to call
+                t = Type.GetType(classToCall);
+                method = t.GetMethod(methodToCall, BindingFlags.Public | BindingFlags.Static);
+                isValidMethod = method != null;
+                if (!isValidMethod)
+                {
+                    Console.WriteLine("\nThe question you have chosen does no exist");
+                }
+            }
             Console.Clear();
-
 
             // Run the class method until user chooses to stop
             Console.WriteLine("Running {0} of {1} \n", methodToCall, classToCall);

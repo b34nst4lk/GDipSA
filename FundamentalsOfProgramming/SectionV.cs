@@ -81,10 +81,9 @@ namespace Workshop
 
             Console.WriteLine();
 
-            int padding = 6;
             for (int i = 1; i <=6; i++)
             {
-                Console.WriteLine(new String('*', i).PadLeft(padding));
+                Console.WriteLine(new String('*', i).PadLeft(Console.WindowWidth));
             }
         }
 
@@ -104,6 +103,91 @@ namespace Workshop
             {
                 Console.WriteLine(new String('*', i).PadLeft(padding));
             }
+        }
+
+        public static void Q8()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write(j + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void Q9()
+        {
+            int lastInt = 1;
+            int i, j;
+            for (i = 0; i <= 4; i++)
+            {
+                for (j = lastInt; j <= i + lastInt; j++)
+                {
+                    Console.Write(j + " ");
+                }
+                lastInt = j;
+                Console.WriteLine();
+            }
+        }
+
+        public static void Q10()
+        {
+            Random r = new Random();
+            int rn;
+            do
+            {
+                rn = r.Next(1, 7);
+                Console.WriteLine(rn);
+            } while (rn != 6);
+        }
+
+        public static void Q11()
+        {
+            Random r = new Random();
+            int rn, sn;
+            do
+            {
+                rn = r.Next(1, 7);
+                sn = r.Next(1, 7);
+
+                Console.WriteLine("{0}\t{1}", rn, sn);
+            } while (rn != sn);
+        }
+
+        public static void Q12()
+        {
+            Random r = new Random();
+            int rn = 0, sn = 0;
+
+            do
+            {
+                sn = rn;
+                rn = r.Next(1, 7);
+
+                Console.WriteLine("{0}", rn);
+            } while (rn != sn);
+        }
+
+        public static void Q13()
+        {
+            Random r = new Random();
+            int rn = 0, sn = 0, tn = 0;
+
+            do
+            {
+                tn = sn;
+                sn = rn;
+                rn = r.Next(1, 7);
+
+                Console.WriteLine("{0}", rn);
+            } while (rn != sn | sn != tn);
+        }
+
+        public static void Q14()
+        {
+
         }
     }
 }

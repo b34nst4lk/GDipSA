@@ -2,26 +2,27 @@
 
 namespace Workshop
 {
+    delegate double DoubleOps(double n);
     class SectionH
     {
-		public static void Q1()
+        public static void Q1()
         {
             Console.WriteLine("Please enter a number: ");
             Console.WriteLine("You entered {0}", Day5Methods.ReadInteger());
         }
 
-		public static void Q2()
+        public static void Q2()
         {
             int[] arr = SectionG.CreateRndIntArr(13, 0, 99);
             Day5Methods.PrintArray(arr);
         }
 
-		public static void Q3()
+        public static void Q3()
         {
             string str1 = Day5Methods.ReadString("Please enter the string to search in: ");
             string str2 = Day5Methods.ReadString("Please enter the string to find: ");
 
-			if (Day5Methods.InString(str1, str2))
+            if (Day5Methods.InString(str1, str2))
             {
                 Console.Write("\"{0}\" can be found in \"{1}\"", str2, str1);
             }
@@ -31,13 +32,13 @@ namespace Workshop
             }
         }
 
-		public static void Q4()
+        public static void Q4()
         {
             string str1 = Day5Methods.ReadString("Please enter the string to search in: ");
             string str2 = Day5Methods.ReadString("Please enter the string to find: ");
 
             int pos = Day5Methods.FindString(str1, str2);
-			if (pos >= 0)
+            if (pos >= 0)
             {
                 Console.Write("\"{0}\" can be found at position {1}", str2, pos);
             }
@@ -47,14 +48,14 @@ namespace Workshop
             }
         }
 
-		public static void Q5()
+        public static void Q5()
         {
             int input = Day5Methods.ReadInteger();
             string output = Day5Methods.ConvertDecToHex(input);
             Console.WriteLine("{0} in hex is {1}", input, output);
         }
 
-		public static void Q6()
+        public static void Q6()
         {
             string str = Day5Methods.ReadString();
             char c1 = Day5Methods.ReadChar("Please enter the character to find: ");
@@ -66,7 +67,7 @@ namespace Workshop
             Console.WriteLine("After : {0}", output);
         }
 
-		public static void Q7()
+        public static void Q7()
         {
             int i = Day5Methods.ReadInteger();
 
@@ -75,7 +76,7 @@ namespace Workshop
             Console.WriteLine(string.Join(", ", Day5Methods.SetArray(arr, i)) + "\n");
         }
 
-		public static void Q8()
+        public static void Q8()
         {
             Console.WriteLine("Randomly generate an int array");
             int[] arr = SectionG.CreateRndIntArr(8, -100, 100);
@@ -90,11 +91,11 @@ namespace Workshop
             Day5Methods.PrintArray(largerArr);
         }
 
-		public static void Q9()
+        public static void Q9()
         {
-			for (int i=5; i <= 1000; i++)
+            for (int i=5; i <= 1000; i++)
             {
-				if (Day5Methods.IsPrime(i))
+                if (Day5Methods.IsPrime(i))
                 {
                     Console.WriteLine(i);
                 }
@@ -110,31 +111,47 @@ namespace Workshop
 
             //Test case 2 --
             int[,] C =  
-				{
-					{ 53, 49 },
-					{ 87, 75 },
-					{ 93, 3 },
-					{ 70, 12 },
-					{ 56, 22 }
-				};
+                {
+                    { 53, 49 },
+                    { 87, 75 },
+                    { 93, 3 },
+                    { 70, 12 },
+                    { 56, 22 }
+                };
             int[,] D =
-				{
-					{ 96, 26, 81, 90, 19 },
-					{ 5, 34, 97, 85, 29 }
-				};
+                {
+                    { 96, 26, 81, 90, 19 },
+                    { 5, 34, 97, 85, 29 }
+                };
             Day5Methods.Print2DArray(Day5Methods.MatrixMultiplication(C, D));
+        }
+
+        public static void Q11()
+        {
+            double[] arr = new double[5];
+            for (int i = 0; i < 5; i++)
+            {
+                arr[i] = Day5Methods.ReadDouble();
+            }
+
+            // Double everything in array
+            Day5Methods.PrintArray(Day5Methods.ProcessArray(arr, Day5Methods.DoubleTheDouble));
+
+            // Square root everything in array
+            Day5Methods.PrintArray(Day5Methods.ProcessArray(arr, Math.Sqrt));
         }
     }
 
+
     class Day5Methods
     {
-		public static string ReadString(string msg = "Please enter a string: ")
+        public static string ReadString(string msg = "Please enter a string: ")
         {
-			Console.WriteLine(msg);
-			return Console.ReadLine();
+            Console.WriteLine(msg);
+            return Console.ReadLine();
         }
-		
-		public static char ReadChar(string msg = "Please enter a character: ")
+        
+        public static char ReadChar(string msg = "Please enter a character: ")
         {
             string input = "";
             char rv;
@@ -160,19 +177,42 @@ namespace Workshop
             return rv;
         }
 
-		public static void PrintArray(int[] arr)
+        public static double ReadDouble(string msg = "Please enter a number: ")
         {
-			for (int i = 0; i < arr.Length; i++)
+            string input = "";
+            double rv;
+
+            while (!Double.TryParse(input, out rv))
+            {
+                Console.WriteLine(msg);
+                input = Console.ReadLine();
+            }
+            return rv;
+        }
+
+        public static void PrintArray(double[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
             {
                 Console.Write(arr[i] + "\t");
             }
+            Console.WriteLine();
         }
 
-		public static void Print2DArray(int[,] arr)
+        public static void PrintArray(int[] arr)
         {
-			for (int i = 0; i < arr.GetLength(0); i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-				for (int j=0; j < arr.GetLength(1); j++)
+                Console.Write(arr[i] + "\t");
+            }
+            Console.WriteLine();
+        }
+
+        public static void Print2DArray(int[,] arr)
+        {
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                for (int j=0; j < arr.GetLength(1); j++)
                 {
                     Console.Write(arr[i, j] + "\t");
                 }
@@ -186,45 +226,45 @@ namespace Workshop
             str1 = str1.ToLower();
             str2 = str2.ToLower();
 
-			for (int i = 0; i < str1.Length - str2.Length + 1; i++)
+            for (int i = 0; i < str1.Length - str2.Length + 1; i++)
             {
                 string substr = str1.Substring(i, str2.Length);
                 rv = substr == str2;
-				if (rv)
+                if (rv)
                 {
                     break;
                 }
             }
-			
+            
             return rv;
         }
 
-		public static int FindString(string str1, string str2)
+        public static int FindString(string str1, string str2)
         {
             int rv = -1;
             str1 = str1.ToLower();
             str2 = str2.ToLower();
 
-			for (int i = 0; i < str1.Length - str2.Length + 1; i++)
+            for (int i = 0; i < str1.Length - str2.Length + 1; i++)
             {
                 string substr = str1.Substring(i, str2.Length);
-				if (substr == str2)
+                if (substr == str2)
                 {
                 rv = i;
                     break;
                 }
             }
-			
+            
             return rv;
         }
 
-		public static string ConvertDecToHex(int input)
+        public static string ConvertDecToHex(int input)
         {
             string[] hexArr = new string[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
             string rv = "";
             int dividend = input;
 
-			while (dividend > 0)
+            while (dividend > 0)
             {
                 int remainder = dividend % 16;
                 rv = hexArr[remainder] + rv;
@@ -233,13 +273,13 @@ namespace Workshop
             return rv;
         }
 
-		public static string Substitute(string s, char c1, char c2)
+        public static string Substitute(string s, char c1, char c2)
         {
             string rv = "";
 
-			for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
-				if (s[i] == c1)
+                if (s[i] == c1)
                 {
                     rv += c2;
                 }
@@ -252,9 +292,9 @@ namespace Workshop
             return rv;
         }
 
-		public static int[] SetArray(int[] arr, int value)
+        public static int[] SetArray(int[] arr, int value)
         {
-			for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = value;
             }
@@ -262,10 +302,10 @@ namespace Workshop
             return arr;
         }
 
-		public static int[] ResizeArray(int[] arr, int newSize)
+        public static int[] ResizeArray(int[] arr, int newSize)
         {
             int[] newArr = new int[newSize];
-			for (int i = 0; i < Math.Min(arr.Length, newSize); i++)
+            for (int i = 0; i < Math.Min(arr.Length, newSize); i++)
             {
                 newArr[i] = arr[i];
             }
@@ -296,33 +336,33 @@ namespace Workshop
 
         public static int[,] MatrixMultiplication(int[,] A, int[,] B)
         {
-			// Get outer dimensions
+            // Get outer dimensions
             int lenA = A.GetLength(0);
-			int lenB = B.GetLength(1);
+            int lenB = B.GetLength(1);
 
-			// Get inner dimension
+            // Get inner dimension
             int innerA = A.GetLength(1);
-			int innerB = B.GetLength(0);
+            int innerB = B.GetLength(0);
             int lenInner;
-			
-			// Validate inner dimensions are equal, if not then exit
-			if (innerA != innerB)
+            
+            // Validate inner dimensions are equal, if not then exit
+            if (innerA != innerB)
             {
                 int[,] rv = new int[1,1] { { -1 } };
-				return rv;
+                return rv;
             }
             else
             {
                 lenInner = innerA;
             }			
 
-			// init return arr
+            // init return arr
             int[,] C = new int[lenB, lenA];
 
-			// compute return arr
+            // compute return arr
             for (int Ci = 0; Ci < C.GetLength(0); Ci++)
             {
-				for (int Cj = 0; Cj < C.GetLength(1); Cj++)
+                for (int Cj = 0; Cj < C.GetLength(1); Cj++)
                 {
                     int Cvalue = 0;
                     for (int inner = 0; inner < lenInner; inner++)
@@ -333,6 +373,21 @@ namespace Workshop
                 }
             }
             return C;
+        }
+
+        public static double DoubleTheDouble(double theDouble)
+        {
+            double DoubledDouble = theDouble * 2;
+            return DoubledDouble;
+        }
+
+        public static double[] ProcessArray(double[] arr, DoubleOps ops)
+        {
+            for (int i=0; i<arr.Length; i++)
+            {
+                arr[i] = ops(arr[i]);
+            }
+            return arr;
         }
     }
 }

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesProject", "ShapesProj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceProject", "DiceProject\DiceProject.csproj", "{18D0CFC3-87E8-429B-806C-67B5E35C7772}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount", "BankAccount\BankAccount.csproj", "{254A4364-EAA2-4F33-96EF-9349F92305E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank", "Bank\Bank.csproj", "{F2845472-DFE5-410E-9BFB-8285EFC03BA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{18D0CFC3-87E8-429B-806C-67B5E35C7772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18D0CFC3-87E8-429B-806C-67B5E35C7772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18D0CFC3-87E8-429B-806C-67B5E35C7772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{254A4364-EAA2-4F33-96EF-9349F92305E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{254A4364-EAA2-4F33-96EF-9349F92305E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{254A4364-EAA2-4F33-96EF-9349F92305E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{254A4364-EAA2-4F33-96EF-9349F92305E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2845472-DFE5-410E-9BFB-8285EFC03BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2845472-DFE5-410E-9BFB-8285EFC03BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2845472-DFE5-410E-9BFB-8285EFC03BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2845472-DFE5-410E-9BFB-8285EFC03BA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

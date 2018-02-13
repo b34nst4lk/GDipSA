@@ -220,6 +220,18 @@ namespace Workshop
             }
         }
 
+        public static void Print2DArray(double[,] arr)
+        {
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                for (int j=0; j < arr.GetLength(1); j++)
+                {
+                    Console.Write(arr[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
+
         public static bool InString(string str1, string str2)
         {
             bool rv = false;

@@ -4,12 +4,7 @@ namespace BankAccountTypes
 {
     class SavingsAccount : Account
     {
-        public SavingsAccount(string aN, string aHN, double bal) : base(aN, aHN, bal)
-        {
-            {
-                Deposit(bal);
-            }
-        }
+        public SavingsAccount(string aN, string aHN, double bal) : base(aN, aHN, bal) { }
 
         public new string ToString()
         {

@@ -6,7 +6,7 @@ namespace DiceProject
     {
         int faceUp;
         int noOfFaces;
-        Random r = new Random();
+        static Random r = new Random();
 
         public Dice() // Default 6 sided dice
         {
@@ -14,10 +14,18 @@ namespace DiceProject
             Throw();
         }
 
-        public Dice(int faces) // Default 6 sided dice
+        public Dice(int faces) 
         {
             noOfFaces = faces;
             Throw();
+        }
+
+        public string StrFaceUp 
+        {
+            get
+            {
+                return Convert.ToString("faceUp");
+            }
         }
 
         public int GetNoOfFaces()

@@ -7,6 +7,7 @@ namespace BankAccountTypes
         protected string accNumber;
         protected string accHolderName;
         protected double balance;
+        protected static double interest = 0.01;
         protected double interestAmt;
 
         public Account(string aN, string aHN, double bal)
@@ -40,6 +41,14 @@ namespace BankAccountTypes
             }
         }
 
+        public static double Interest
+        {
+            get
+            {
+                return interest;
+            }
+        }
+
         public double InterestAmt
         {
             get
@@ -69,14 +78,14 @@ namespace BankAccountTypes
             target.Deposit(amt);
         }
 
-        public void CalculateInterest(double interest)
+        public void CalculateInterest()
         {
             interestAmt = interest * balance;
         }
 
-        public void CreditInterest(double interest)
+        public void CreditInterest()
         {
-            CalculateInterest(interest);
+            CalculateInterest();
             balance += interestAmt;
         }
     }

@@ -74,10 +74,9 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmountIsCorrectlyCalculated()
         {
-            double interest = r.NextDouble() * 0.03;
-            double correctInterestAmt = acc.Bal * interest;
+            double correctInterestAmt = acc.Bal * Account.Interest;
 
-            acc.CalculateInterest(interest);
+            acc.CalculateInterest();
 
             Assert.AreEqual(acc.InterestAmt, correctInterestAmt);
         }
@@ -86,10 +85,9 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmtIsCredited()
         {
-            double interest = r.Next(1, 100)/100;
-            double correctAmountAfterInterestCredit = acc.Bal * (1 + interest);
+            double correctAmountAfterInterestCredit = acc.Bal * (1 + Account.Interest);
 
-            acc.CreditInterest(interest);
+            acc.CreditInterest();
 
             Assert.AreEqual(acc.Bal, correctAmountAfterInterestCredit);
         }

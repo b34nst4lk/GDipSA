@@ -4,10 +4,10 @@ namespace BankAccountTypes
 {
     class Account
     {
-        string accNumber;
-        string accHolderName;
-        double balance;
-        double interestAmt;
+        protected string accNumber;
+        protected string accHolderName;
+        protected double balance;
+        protected double interestAmt;
 
         public Account(string aN, string aHN, double bal)
         {

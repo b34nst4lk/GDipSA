@@ -13,7 +13,7 @@ namespace BankAccountTypes
         {
             accNumber = aN;
             accHolderName = aHN;
-            balance = bal;
+            Deposit(bal);
         }
 
         public string AccNo
@@ -55,12 +55,12 @@ namespace BankAccountTypes
 
         public void Withdraw(double amt)
         {
-            balance -= amt;
+            balance -= Math.Max(amt, 0);
         }
 
         public void Deposit(double amt)
         {
-            balance += amt;
+            balance += Math.Max(amt, 0);
         }
 
         public void TransferTo(double amt, Account target)

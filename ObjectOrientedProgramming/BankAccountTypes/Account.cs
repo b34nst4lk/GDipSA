@@ -59,7 +59,7 @@ namespace BankAccountTypes
 
         public new string ToString()
         {
-            return String.Format("{0}\t{1}\t{2:C}", accNumber, accHolderName, balance);
+            return String.Format("Account({0}, {1}, {2:C})", accNumber, accHolderName, balance);
         }
 
         public void Withdraw(double amt)

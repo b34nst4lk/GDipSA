@@ -27,7 +27,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestTheReturnValueOfToString()
         {
-            string correctString = String.Format("{0}\t{1}\t{2:C}", acc.AccNo, acc.AccHolderName, acc.Bal);
+            string correctString = String.Format("Account({0}, {1}, {2:C})", acc.AccNo, acc.AccHolderName, acc.Bal);
 
             Assert.AreEqual(acc.ToString(), correctString);
         }
@@ -58,15 +58,24 @@ namespace BankAccountTypes
 
         //TransferTo()
         [TestCase]
-        public void TestThatTransferDeductsFromAccountAndAddsToTargetAccountBalance()
+        public void TestThatTransferDeductsFromAccount()
         {
             double transferAmt = r.NextDouble() * (4999) + 1;
             double correctAccBal = acc.Bal - transferAmt;
-            double correctTargetBal = targetAcc.Bal + transferAmt;
 
             acc.TransferTo(transferAmt, targetAcc);
 
             Assert.AreEqual(acc.Bal, correctAccBal);
+        }
+
+        [TestCase]
+        public void TestThatTransferDepositsToTargetAccount()
+        {
+            double transferAmt = r.NextDouble() * (4999) + 1;
+            double correctTargetBal = targetAcc.Bal + transferAmt;
+
+            acc.TransferTo(transferAmt, targetAcc);
+
             Assert.AreEqual(targetAcc.Bal, correctTargetBal);
         }
 

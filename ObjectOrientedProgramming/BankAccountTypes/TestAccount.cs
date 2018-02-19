@@ -36,7 +36,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatWithdrawDeductsTheRightAmountFromBalance()
         {
-            double withdrawAmt = r.Next() * (4999) + 1;
+            double withdrawAmt = r.NextDouble() * (4999) + 1;
             double correctBal = acc.Bal - withdrawAmt;
 
             acc.Withdraw(withdrawAmt);
@@ -48,7 +48,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatDepositAddsCorrectAmountToBalance()
         {
-            double depositAmt = r.Next() * (4999) + 1;
+            double depositAmt = r.NextDouble() * (4999) + 1;
             double correctBal = acc.Bal + depositAmt;
 
             acc.Deposit(depositAmt);
@@ -60,7 +60,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatTransferDeductsFromAccountAndAddsToTargetAccountBalance()
         {
-            double transferAmt = r.Next() * (4999) + 1;
+            double transferAmt = r.NextDouble() * (4999) + 1;
             double correctAccBal = acc.Bal - transferAmt;
             double correctTargetBal = targetAcc.Bal + transferAmt;
 
@@ -74,7 +74,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmountIsCorrectlyCalculated()
         {
-            double interest = r.Next() * 0.03;
+            double interest = r.NextDouble() * 0.03;
             double correctInterestAmt = acc.Bal * interest;
 
             acc.CalculateInterest(interest);
@@ -86,7 +86,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmtIsCredited()
         {
-            double interest = r.Next() * 0.03;
+            double interest = r.Next(1, 100)/100;
             double correctAmountAfterInterestCredit = acc.Bal * (1 + interest);
 
             acc.CreditInterest(interest);

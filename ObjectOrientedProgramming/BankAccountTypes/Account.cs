@@ -53,6 +53,7 @@ namespace BankAccountTypes
         {
             get
             {
+                CalculateInterest();
                 return interestAmt;
             }
         }
@@ -80,7 +81,7 @@ namespace BankAccountTypes
 
         public void CalculateInterest()
         {
-            interestAmt = interest * balance;
+            interestAmt = Interest * balance;
         }
 
         public void CreditInterest()

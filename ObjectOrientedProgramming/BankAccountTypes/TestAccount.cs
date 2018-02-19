@@ -12,8 +12,8 @@ namespace BankAccountTypes
         [SetUp]
         public void SetUp()
         {
-            acc = new Account("Tan", "000-001", 2000);
-            targetAcc = new Account("Lee", "000-002", 3000);
+            acc = new Account("000-001", "Tan", 2000);
+            targetAcc = new Account("000-002", "Lee", 3000);
         }
 
         [TearDown]
@@ -22,6 +22,30 @@ namespace BankAccountTypes
             acc = null;
         }
 
+        //Constructor
+        [TestCase]
+        public void TestAccountHolderNameConstructor()
+        {
+            Account tempAcc = new Account("000-001", "Tan", 2000);
+
+            Assert.AreEqual("Tan", tempAcc.AccHolderName);
+        }
+
+        [TestCase]
+        public void TestAccountNoConstructor()
+        {
+            Account tempAcc = new Account("000-001", "Tan", 2000);
+
+            Assert.AreEqual("000-001", tempAcc.AccNo);
+        }
+
+        [TestCase]
+        public void TestAccountBalanceConstructor()
+        {
+            Account tempAcc = new Account("000-001", "Tan", 2000);
+
+            Assert.AreEqual(2000, tempAcc.Bal);
+        }
 
         //ToString()
         [TestCase]

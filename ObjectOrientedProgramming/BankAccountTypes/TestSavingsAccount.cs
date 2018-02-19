@@ -26,6 +26,31 @@ namespace BankAccountTypes
             targetAcc = null;
         }
 
+        //Constructor
+        [TestCase]
+        public void TestAccountHolderNameConstructor()
+        {
+            SavingsAccount tempAcc = new SavingsAccount("000-001", "Tan", 2000);
+
+            Assert.AreEqual("Tan", tempAcc.AccHolderName);
+        }
+
+        [TestCase]
+        public void TestAccountNoConstructor()
+        {
+            SavingsAccount tempAcc = new SavingsAccount("000-001", "Tan", 2000);
+
+            Assert.AreEqual("000-001", tempAcc.AccNo);
+        }
+
+        [TestCase]
+        public void TestAccountBalanceConstructor()
+        {
+            SavingsAccount tempAcc = new SavingsAccount("000-001", "Tan", 2000);
+
+            Assert.AreEqual(2000, tempAcc.Bal);
+        }
+
         //ToString()
         [TestCase]
         public void TestTheReturnValueOfToString()
@@ -34,7 +59,6 @@ namespace BankAccountTypes
 
             Assert.AreEqual(acc.ToString(), correctString);
         }
-
 
         // Withdraw()
         [TestCase]

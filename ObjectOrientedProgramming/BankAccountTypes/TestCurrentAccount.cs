@@ -14,9 +14,9 @@ namespace BankAccountTypes
         [SetUp]
         public void SetUp()
         {
-            acc = new CurrentAccount("Tan", "000-001", 2000);
-            targetAcc = new CurrentAccount("Lim", "000-002", 3000);
-            parentTargetAcc = new Account("Sim", "000-000", 5000);
+            acc = new CurrentAccount("000-001", "Tan", 2000);
+            targetAcc = new CurrentAccount("000-002", "Lim", 3000);
+            parentTargetAcc = new Account("000-000", "Sim", 5000);
         }
 
         [TearDown]
@@ -26,11 +26,36 @@ namespace BankAccountTypes
             targetAcc = null;
         }
 
+        //Constructor
+        [TestCase]
+        public void TestAccountHolderNameConstructor()
+        {
+            CurrentAccount tempAcc = new CurrentAccount("000-001", "Tan", 2000);
+
+            Assert.AreEqual("Tan", tempAcc.AccHolderName);
+        }
+
+        [TestCase]
+        public void TestAccountNoConstructor()
+        {
+            CurrentAccount tempAcc = new CurrentAccount("000-001", "Tan", 2000);
+
+            Assert.AreEqual("000-001", tempAcc.AccNo);
+        }
+
+        [TestCase]
+        public void TestAccountBalanceConstructor()
+        {
+            CurrentAccount tempAcc = new CurrentAccount("000-001", "Tan", 2000);
+
+            Assert.AreEqual(2000, tempAcc.Bal);
+        }
+
         //Interest
         [TestCase]
         public void TestThatInterestRateIsCorrect()
         {
-            Assert.IsTrue(CurrentAccount.Interest == 0.0025);
+            Assert.AreEqual(0.0025, CurrentAccount.Interest);
         }
 
         //ToString()

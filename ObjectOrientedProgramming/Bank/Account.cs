@@ -22,7 +22,14 @@ namespace Bank
 
         public void Withdraw(double amt)
         {
-            balance -= amt;
+            if (amt > balance)
+            {
+                Console.WriteLine("Your account has insufficient funds.");
+            }
+            else
+            {
+                balance -= amt;
+            }
         }
 
         public void Deposit(double amt)

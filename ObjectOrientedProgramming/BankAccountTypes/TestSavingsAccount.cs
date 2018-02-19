@@ -142,7 +142,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmountIsCorrectlyCalculated()
         {
-            double correctInterestAmt = acc.Bal * Account.Interest;
+            double correctInterestAmt = acc.Bal * SavingsAccount.Interest;
 
             acc.CalculateInterest();
 
@@ -153,7 +153,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmtIsCredited()
         {
-            double correctAmountAfterInterestCredit = acc.Bal * (1 + Account.Interest);
+            double correctAmountAfterInterestCredit = acc.Bal * (1 + SavingsAccount.Interest);
 
             acc.CreditInterest();
 

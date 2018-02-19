@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Linq;
 
 namespace Workshop
 {
     class SectionV
     {
+        //Printing a series of numbers based on a pattern
         public static void Q1()
         {
-            for (int i=1; i <= 20; i++)
+            for (int i = 1; i <= 20; i++)
             {
                 Console.Write(i + " ");
             }
@@ -15,7 +15,7 @@ namespace Workshop
 
         public static void Q2()
         {
-            for (int i=20; i > 0; i--)
+            for (int i = 20; i > 0; i--)
             {
                 Console.Write(i + " ");
             }
@@ -24,14 +24,14 @@ namespace Workshop
         public static void Q3()
         {
             Console.WriteLine("Without using reminder");
-            for (int i=1; i <= 20; i += 2)
+            for (int i = 1; i <= 20; i += 2)
             {
                 Console.Write(i + " ");
             }
             Console.WriteLine("\n");
 
             Console.WriteLine("Using reminder");
-            for (int i=1; i <= 20; i++)
+            for (int i = 1; i <= 20; i++)
             {
                 if (i % 2 == 1)
                 {
@@ -50,7 +50,7 @@ namespace Workshop
             int temp;
             Console.Write(smallerNum + " ");
 
-            for (int i=0; i < 11; i++)
+            for (int i = 0; i < 11; i++)
             {
                 Console.Write(biggerNum + " ");
                 temp = biggerNum;
@@ -70,10 +70,11 @@ namespace Workshop
             }
         }
 
+        //Printing a pattern
         public static void Q6()
         {
             Console.WriteLine("Printing asterisk triangles\n");
-            
+
             for (int i = 1; i <= 6; i++)
             {
                 Console.WriteLine(new String('*', i));
@@ -81,7 +82,7 @@ namespace Workshop
 
             Console.WriteLine();
 
-            for (int i = 1; i <=6; i++)
+            for (int i = 1; i <= 6; i++)
             {
                 Console.WriteLine(new String('*', i).PadLeft(Console.WindowWidth));
             }
@@ -132,6 +133,7 @@ namespace Workshop
             }
         }
 
+        //Roll dice until certain conditions are met
         public static void Q10()
         {
             Random r = new Random();

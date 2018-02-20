@@ -20,6 +20,7 @@ namespace BankAccountTypes
         public void TearDown()
         {
             acc = null;
+            targetAcc = null;
         }
 
         //Constructor
@@ -47,6 +48,15 @@ namespace BankAccountTypes
             Assert.AreEqual(2000, tempAcc.Bal);
         }
 
+        [TestCase]
+        public void TestThatInterestRateIsOnePercent()
+        {
+            Account tempAcc = new Account("000-001", "Tan", 2000);
+
+            Assert.AreEqual(0.01, tempAcc.Interest);
+        }
+
+ 
         //ToString()
         [TestCase]
         public void TestTheReturnValueOfToString()
@@ -107,7 +117,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmountIsCorrectlyCalculated()
         {
-            double correctInterestAmt = acc.Bal * Account.Interest;
+            double correctInterestAmt = acc.Bal * acc.Interest;
 
             acc.CalculateInterest();
 
@@ -118,7 +128,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestThatInterestAmtIsCredited()
         {
-            double correctAmountAfterInterestCredit = acc.Bal * (1 + Account.Interest);
+            double correctAmountAfterInterestCredit = acc.Bal * (1 + acc.Interest);
 
             acc.CreditInterest();
 

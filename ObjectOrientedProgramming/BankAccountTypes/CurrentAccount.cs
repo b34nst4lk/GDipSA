@@ -8,7 +8,7 @@ namespace BankAccountTypes
 
         public CurrentAccount(string aN, string aHN, double bal) : base(aN, aHN, bal) {}
 
-        public static new double Interest
+        public override double Interest
         {
             get
             {
@@ -30,15 +30,9 @@ namespace BankAccountTypes
             return String.Format(String.Format("CurrentAccount({0}, {1}, {2:C})", accNumber, accHolderName, balance));
         }
 
-        public new void CalculateInterest()
+        public override void CalculateInterest()
         {
             interestAmt = Interest * balance;
-        }
-
-        public new void CreditInterest()
-        {
-            CalculateInterest();
-            balance += InterestAmt;
         }
     }
 }

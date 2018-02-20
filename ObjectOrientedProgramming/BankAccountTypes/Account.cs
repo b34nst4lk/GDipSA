@@ -43,7 +43,7 @@ namespace BankAccountTypes
             }
         }
 
-        public static double Interest
+        public virtual double Interest
         {
             get
             {
@@ -81,7 +81,7 @@ namespace BankAccountTypes
             target.Deposit(amt);
         }
 
-        public void CalculateInterest()
+        public virtual void CalculateInterest()
         {
             interestAmt = Interest * balance;
         }

@@ -10,6 +10,8 @@ namespace BankAccountTypes
         protected static double interest = 0.01;
         protected double interestAmt;
 
+        public Account() { } 
+
         public Account(string aN, string aHN, double bal)
         {
             accNumber = aN;
@@ -58,7 +60,7 @@ namespace BankAccountTypes
             }
         }
 
-        public new string ToString()
+        public override string ToString()
         {
             return String.Format("Account({0}, {1}, {2:C})", accNumber, accHolderName, balance);
         }

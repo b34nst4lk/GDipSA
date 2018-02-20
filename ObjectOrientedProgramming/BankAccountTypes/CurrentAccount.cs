@@ -25,7 +25,7 @@ namespace BankAccountTypes
             }
         }
 
-        public new string ToString()
+        public override string ToString()
         {
             return String.Format(String.Format("CurrentAccount({0}, {1}, {2:C})", accNumber, accHolderName, balance));
         }

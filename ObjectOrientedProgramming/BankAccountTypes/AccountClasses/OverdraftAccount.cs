@@ -5,39 +5,42 @@ namespace BankAccountTypes
 {
     class OverdraftAccount: Account
     {
-        protected static double negInterest = 0.06;
-        protected new static double interest = 0.0025;
-
+        double posInt = 0.0025;
+        double negInt = 0.06;
+        
         public OverdraftAccount(string aN, string aHN, double bal)
         {
             accNumber = aN;
             accHolderName = aHN;
-            balance = bal;
-        }
-
-        public override string ToString()
-        {
-            return String.Format("OverdraftAccount({0}, {1}, {2:C})", accNumber, accHolderName, balance);
+            if (bal > 0)
+            {
+                Deposit(bal);
+            }
+            else
+            {
+                Withdraw(Math.Abs(bal));
+            }
         }
 
         public override double Interest
         {
             get
             {
-                if (balance < 0)
+                if (Bal > 0)
                 {
-                    return negInterest;
+                    return posInt;
                 }
                 else
                 {
-                    return interest;
+                    return negInt;
                 }
+                
             }
         }
 
-        public override void CalculateInterest()
+        public override string ToString()
         {
-            interestAmt = Interest * balance;
+            return String.Format("OverdraftAccount({0}, {1}, {2:C})", accNumber, accHolderName, Bal);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace BankAccountTypes
     {
         SavingsAccount acc;
         SavingsAccount targetAcc;
-        Account parentTargetAcc;
         Random r = new Random();
 
         [SetUp]
@@ -16,7 +15,6 @@ namespace BankAccountTypes
         {
             acc = new SavingsAccount("Tan", "000-001", 2000);
             targetAcc = new SavingsAccount("Lim", "000-002", 3000);
-            parentTargetAcc = new Account("Sim", "000-000", 5000);
         }
 
         [TearDown]

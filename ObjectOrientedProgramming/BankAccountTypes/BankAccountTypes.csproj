@@ -48,7 +48,6 @@
     <Compile Include="AccountClasses\Account.cs" />
     <Compile Include="AccountClasses\CurrentAccount.cs" />
     <Compile Include="AccountClasses\OverdraftAccount.cs" />
-    <Compile Include="Tests\TestAccount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AccountClasses\SavingsAccount.cs" />

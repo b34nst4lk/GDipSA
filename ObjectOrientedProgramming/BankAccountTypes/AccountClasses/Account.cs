@@ -4,9 +4,9 @@ namespace BankAccountTypes
 {
     abstract class Account
     {
+        double balance;
         protected string accNumber;
         protected string accHolderName;
-        protected double balance;
         protected double interestAmt;
 
         public string AccNo
@@ -33,7 +33,7 @@ namespace BankAccountTypes
             }
         }
 
-        public abstract double Interest;
+        public abstract double Interest { get; }
 
         public double InterestAmt
         {
@@ -65,7 +65,7 @@ namespace BankAccountTypes
             target.Deposit(amt);
         }
 
-        public virtual void CalculateInterest()
+        public void CalculateInterest()
         {
             interestAmt = Interest * balance;
         }

@@ -7,14 +7,22 @@ namespace BankAccountTypes.Tests
     class TestOverdraftAccount
     {
         OverdraftAccount posAcc;
+        OverdraftAccount negAcc;
         OverdraftAccount targetAcc;
+
+        Customer c;
+        Customer c2;
 
 
         [SetUp]
         public void SetUp()
         {
-            posAcc = new OverdraftAccount("000-001", "Tan", 2000);
-            targetAcc = new OverdraftAccount("000-002", "Lim", 3000);
+            c = new Customer("1", "Tan", new DateTime(1996, 1, 1));
+            c2 = new Customer("1", "Lim", new DateTime(1996, 1, 1));
+
+            posAcc = new OverdraftAccount("000-001", c, 2000);
+            negAcc = new OverdraftAccount("000-001", c2, -3000);
+            targetAcc = new OverdraftAccount("000-002", c, 3000);
         }
 
         [TearDown]
@@ -29,50 +37,38 @@ namespace BankAccountTypes.Tests
         [TestCase]
         public void TestAccountHolderNameConstructor()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
-
-            Assert.AreEqual("Tan", tempAcc.AccHolderName);
+            Assert.AreEqual(c.Name, posAcc.AccHolderName);
         }
 
         [TestCase]
         public void TestAccountNoConstructor()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
-
-            Assert.AreEqual("000-001", tempAcc.AccNo);
+            Assert.AreEqual("000-001", posAcc.AccNo);
         }
 
         [TestCase]
         public void TestAccountPositiveBalanceConstructor()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
-
-            Assert.AreEqual(2000, tempAcc.Bal);
+            Assert.AreEqual(2000, posAcc.Bal);
         }
 
         [TestCase]
-        public void TestAccountBalanceConstructor()
+        public void TestAccountNegativeBalanceConstructor()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", -2000);
-
-            Assert.AreEqual(-2000, tempAcc.Bal);
+            Assert.AreEqual(-3000, negAcc.Bal);
         }
 
         //Interest
         [TestCase]
         public void TestThatInterestRateIsCorrectBalanceIsPostive()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
-
-            Assert.AreEqual(0.0025, tempAcc.Interest);
+            Assert.AreEqual(0.0025, posAcc.Interest);
         }
 
         [TestCase]
         public void TestThatInterestRateIsCorrectBalanceIsNegative()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", -2000);
-
-            Assert.AreEqual(0.06, tempAcc.Interest);
+            Assert.AreEqual(0.06, negAcc.Interest);
         }
 
 
@@ -134,8 +130,7 @@ namespace BankAccountTypes.Tests
         [TestCase]
         public void TestThatInterestAmountIsCorrectlyCalculatedWhenBalanceMoreThanZero()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
-            double correctInterestAmt = tempAcc.Bal * tempAcc.Interest;
+            double correctInterestAmt = posAcc.Bal * posAcc.Interest;
 
             posAcc.CalculateInterest();
 
@@ -145,12 +140,11 @@ namespace BankAccountTypes.Tests
         [TestCase]
         public void TestThatInterestAmountIsCorrectlyCalculatedWhenBalanceLessThanZero()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", -2000);
-            double correctInterestAmt = tempAcc.Bal * tempAcc.Interest;
+            double correctInterestAmt = negAcc.Bal * negAcc.Interest;
 
-            tempAcc.CalculateInterest();
+            negAcc.CalculateInterest();
 
-            Assert.AreEqual(correctInterestAmt, tempAcc.InterestAmt);
+            Assert.AreEqual(correctInterestAmt, negAcc.InterestAmt);
         }
 
 
@@ -158,23 +152,21 @@ namespace BankAccountTypes.Tests
         [TestCase]
         public void TestThatInterestAmtIsCreditedWhenBalanceIsMoreThanZero()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
-            double correctAmountAfterInterestCredit = tempAcc.Bal * (1 + tempAcc.Interest);
+            double correctAmountAfterInterestCredit = posAcc.Bal * (1 + posAcc.Interest);
 
-            tempAcc.CreditInterest();
+            posAcc.CreditInterest();
 
-            Assert.AreEqual(correctAmountAfterInterestCredit, tempAcc.Bal);
+            Assert.AreEqual(correctAmountAfterInterestCredit, posAcc.Bal);
         }
 
         [TestCase]
         public void TestThatInterestAmtIsCreditedWhenBalanceIsLessThanZero()
         {
-            OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", -2000);
-            double correctAmountAfterInterestCredit = tempAcc.Bal * (1 + Math.Abs(tempAcc.Interest));
+            double correctAmountAfterInterestCredit = negAcc.Bal * (1 + Math.Abs(negAcc.Interest));
 
-            tempAcc.CreditInterest();
+            negAcc.CreditInterest();
 
-            Assert.AreEqual(correctAmountAfterInterestCredit, tempAcc.Bal);
+            Assert.AreEqual(correctAmountAfterInterestCredit, negAcc.Bal);
         }
     }
 }

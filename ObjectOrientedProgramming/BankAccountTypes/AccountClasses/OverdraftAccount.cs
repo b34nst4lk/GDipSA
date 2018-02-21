@@ -40,7 +40,7 @@ namespace BankAccountTypes
 
         public override string ToString()
         {
-            return String.Format("OverdraftAccount({0}, {1}, {2:C})", accNumber, cust, Bal);
+            return String.Format("OverdraftAccount({0}, {1}, {2:C})", AccNo, AccHolderName, Bal);
         }
     }
 }

@@ -8,13 +8,19 @@ namespace BankAccountTypes
     {
         CurrentAccount acc;
         CurrentAccount targetAcc;
+
+        Customer c;
+        Customer c2;
+
         Random r = new Random();
 
         [SetUp]
         public void SetUp()
         {
-            acc = new CurrentAccount("000-001", "Tan", 2000);
-            targetAcc = new CurrentAccount("000-002", "Lim", 3000);
+            c = new Customer("1", "Tan", new DateTime(1996, 1, 1));
+            c2 = new Customer("1", "Lim", new DateTime(1996, 1, 1));
+            acc = new CurrentAccount("000-001", c, 2000);
+            targetAcc = new CurrentAccount("000-002", c2, 3000);
         }
 
         [TearDown]
@@ -28,25 +34,19 @@ namespace BankAccountTypes
         [TestCase]
         public void TestAccountHolderNameConstructor()
         {
-            CurrentAccount tempAcc = new CurrentAccount("000-001", "Tan", 2000);
-
-            Assert.AreEqual("Tan", tempAcc.AccHolderName);
+            Assert.AreEqual(c.Name, acc.AccHolderName);
         }
 
         [TestCase]
         public void TestAccountNoConstructor()
         {
-            CurrentAccount tempAcc = new CurrentAccount("000-001", "Tan", 2000);
-
-            Assert.AreEqual("000-001", tempAcc.AccNo);
+            Assert.AreEqual("000-001", acc.AccNo);
         }
 
         [TestCase]
         public void TestAccountBalanceConstructor()
         {
-            CurrentAccount tempAcc = new CurrentAccount("000-001", "Tan", 2000);
-
-            Assert.AreEqual(2000, tempAcc.Bal);
+            Assert.AreEqual(2000, acc.Bal);
         }
 
         //Interest

@@ -23,7 +23,7 @@ namespace BankAccountTypes.Tests
             custNo = new Customer("0001", "Tan", new DateTime(1997, 1, 1), "92345678");
             custContact = new Customer("0001", "Tan", new DateTime(1997, 1, 1),"92345678" ,"js@a.com");
 
-            acc = new SavingsAccount("1", "Tan", 2000);
+            acc = new SavingsAccount("1", cust, 2000);
         }
 
         [TearDown]

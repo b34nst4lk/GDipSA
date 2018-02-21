@@ -6,7 +6,7 @@ namespace BankAccountTypes
     {
         public SavingsAccount(string aN, string aHN, double bal) : base(aN, aHN, bal) { }
 
-        public new string ToString()
+        public override string ToString()
         {
             return String.Format(String.Format("SavingsAccount({0}, {1}, {2:C})", accNumber, accHolderName, balance));
         }

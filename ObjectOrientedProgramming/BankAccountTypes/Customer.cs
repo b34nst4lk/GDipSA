@@ -206,7 +206,15 @@ namespace BankAccountTypes
         {
             if (RemoveAccount(acc))
             {
-                return cust.AddAccount(acc);
+                if (cust.AddAccount(acc))
+                {
+                    acc.ChangeCustomer(cust);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {

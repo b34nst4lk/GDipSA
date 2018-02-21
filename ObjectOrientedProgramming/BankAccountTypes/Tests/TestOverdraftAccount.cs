@@ -6,24 +6,21 @@ namespace BankAccountTypes.Tests
     [TestFixture]
     class TestOverdraftAccount
     {
-        OverdraftAccount acc;
+        OverdraftAccount posAcc;
         OverdraftAccount targetAcc;
-        Account parentTargetAcc;
-        Random r = new Random();
 
 
         [SetUp]
         public void SetUp()
         {
-            acc = new OverdraftAccount("000-001", "Tan", 2000);
+            posAcc = new OverdraftAccount("000-001", "Tan", 2000);
             targetAcc = new OverdraftAccount("000-002", "Lim", 3000);
-            parentTargetAcc = new Account("000-000", "Sim", 5000);
         }
 
         [TearDown]
         public void TearDown()
         {
-            acc = null;
+            posAcc = null;
             targetAcc = null;
         }
 
@@ -67,7 +64,7 @@ namespace BankAccountTypes.Tests
         {
             OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
 
-            Assert.AreEqual(0.01, tempAcc.Interest);
+            Assert.AreEqual(0.0025, tempAcc.Interest);
         }
 
         [TestCase]
@@ -83,9 +80,9 @@ namespace BankAccountTypes.Tests
         [TestCase]
         public void TestTheReturnValueOfToString()
         {
-            string correctString = String.Format("OverdraftAccount({0}, {1}, {2:C})", acc.AccNo, acc.AccHolderName, acc.Bal);
+            string correctString = String.Format("OverdraftAccount({0}, {1}, {2:C})", posAcc.AccNo, posAcc.AccHolderName, posAcc.Bal);
 
-            Assert.AreEqual(acc.ToString(), correctString);
+            Assert.AreEqual(correctString, posAcc.ToString());
         }
 
 
@@ -93,25 +90,21 @@ namespace BankAccountTypes.Tests
         [TestCase]
         public void TestForWithdrawWhenAmtLessThanBalance()
         {
-            int accBal = (int)acc.Bal;
-            double withdrawAmt = r.Next(1, accBal);
-            double correctBalance = acc.Bal - withdrawAmt;
+            double correctBalance = posAcc.Bal - 1000;
 
-            acc.Withdraw(withdrawAmt);
+            posAcc.Withdraw(1000);
 
-            Assert.AreEqual(correctBalance, acc.Bal);
+            Assert.AreEqual(1000, posAcc.Bal);
         }
 
         [TestCase]
         public void TestForWithdrawWhenAmtMoreThanBalance()
         {
-            int accBal = (int)acc.Bal;
-            double withdrawAmt = r.Next(accBal, accBal+1000);
-            double correctBalance = acc.Bal - withdrawAmt;
+            double correctBalance = posAcc.Bal - 3000;
 
-            acc.Withdraw(withdrawAmt);
+            posAcc.Withdraw(3000);
 
-            Assert.AreEqual(correctBalance, acc.Bal);
+            Assert.AreEqual(-1000, posAcc.Bal);
         }
 
 
@@ -119,24 +112,22 @@ namespace BankAccountTypes.Tests
         [TestCase]
         public void TestThatDepositAddsCorrectAmountToBalance()
         {
-            double depositAmt = r.NextDouble() * (4999) + 1;
-            double correctBal = acc.Bal + depositAmt;
+            double correctBal = posAcc.Bal + 1000;
 
-            acc.Deposit(depositAmt);
+            posAcc.Deposit(1000);
 
-            Assert.AreEqual(acc.Bal, correctBal);
+            Assert.AreEqual(correctBal, posAcc.Bal);
         }
 
         // TransferTo()
         [TestCase]
         public void TestThatTransferWithdrawsFromAccount()
         {
-            double transferAmt = r.NextDouble() * (acc.Bal + 1000) + 1;
-            double correctAccBal = acc.Bal - transferAmt;
+            double correctAccBal = posAcc.Bal - 1000;
 
-            acc.TransferTo(transferAmt, targetAcc);
+            posAcc.TransferTo(1000, targetAcc);
 
-            Assert.AreEqual(acc.Bal, correctAccBal);
+            Assert.AreEqual(correctAccBal, posAcc.Bal);
         }
 
         //CalculateInterest()
@@ -146,9 +137,9 @@ namespace BankAccountTypes.Tests
             OverdraftAccount tempAcc = new OverdraftAccount("000-001", "Tan", 2000);
             double correctInterestAmt = tempAcc.Bal * tempAcc.Interest;
 
-            acc.CalculateInterest();
+            posAcc.CalculateInterest();
 
-            Assert.AreEqual(acc.InterestAmt, correctInterestAmt);
+            Assert.AreEqual(correctInterestAmt, posAcc.InterestAmt);
         }
 
         [TestCase]
@@ -159,7 +150,7 @@ namespace BankAccountTypes.Tests
 
             tempAcc.CalculateInterest();
 
-            Assert.AreEqual(tempAcc.InterestAmt, correctInterestAmt);
+            Assert.AreEqual(correctInterestAmt, tempAcc.InterestAmt);
         }
 
 
@@ -172,7 +163,7 @@ namespace BankAccountTypes.Tests
 
             tempAcc.CreditInterest();
 
-            Assert.AreEqual(tempAcc.Bal, correctAmountAfterInterestCredit);
+            Assert.AreEqual(correctAmountAfterInterestCredit, tempAcc.Bal);
         }
 
         [TestCase]
@@ -183,7 +174,7 @@ namespace BankAccountTypes.Tests
 
             tempAcc.CreditInterest();
 
-            Assert.AreEqual(tempAcc.Bal, correctAmountAfterInterestCredit);
+            Assert.AreEqual(correctAmountAfterInterestCredit, tempAcc.Bal);
         }
     }
 }

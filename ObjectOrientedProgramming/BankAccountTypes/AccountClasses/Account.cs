@@ -17,6 +17,14 @@ namespace BankAccountTypes
             }
         }
 
+        public Customer Cust
+        {
+            get
+            {
+                return cust;
+            }
+        }
+
         public string AccHolderName
         {
             get

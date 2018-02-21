@@ -315,8 +315,18 @@ namespace BankAccountTypes.Tests
 
             Assert.IsFalse(cust.Accounts.Contains(acc));
         }
+
+        [TestCase]
+        public void TestThatCustomerOfAccountIsUpdatedAfterTransfer()
+        {
+            cust.AddAccount(acc);
+            custEmail.RemoveAccount(acc);
+
+            cust.TransferAccount(acc, custEmail);
+
+            Assert.AreEqual(custEmail, acc.Cust);
+        }
  
-  
         [TestCase]
         public void TestThatTargetCustomerHasAccountAfterTransfer()
         {

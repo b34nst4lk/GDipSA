@@ -4,10 +4,10 @@ namespace BankAccountTypes
 {
     class SavingsAccount : Account
     {
-        public SavingsAccount(string aN, string aHN, double bal)
+        public SavingsAccount(string aN, Customer cust, double bal)
         {
             accNumber = aN;
-            accHolderName = aHN;
+            this.cust = cust;
             Deposit(bal);
         }
 
@@ -22,7 +22,7 @@ namespace BankAccountTypes
 
         public override string ToString()
         {
-            return String.Format(String.Format("SavingsAccount({0}, {1}, {2:C})", accNumber, accHolderName, Bal));
+            return String.Format(String.Format("SavingsAccount({0}, {1}, {2:C})", AccNo, AccHolderName, Bal));
         }
 
         public new bool Withdraw(double amt)

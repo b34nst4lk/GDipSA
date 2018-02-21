@@ -8,10 +8,10 @@ namespace BankAccountTypes
         double posInt = 0.0025;
         double negInt = 0.06;
         
-        public OverdraftAccount(string aN, string aHN, double bal)
+        public OverdraftAccount(string aN, Customer cust, double bal)
         {
             accNumber = aN;
-            accHolderName = aHN;
+            this.cust = cust;
             if (bal > 0)
             {
                 Deposit(bal);
@@ -40,7 +40,7 @@ namespace BankAccountTypes
 
         public override string ToString()
         {
-            return String.Format("OverdraftAccount({0}, {1}, {2:C})", accNumber, accHolderName, Bal);
+            return String.Format("OverdraftAccount({0}, {1}, {2:C})", accNumber, cust, Bal);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace BankAccountTypes
     {
         double balance;
         protected string accNumber;
-        protected string accHolderName;
+        protected Customer cust;
         protected double interestAmt;
 
         public string AccNo
@@ -21,7 +21,7 @@ namespace BankAccountTypes
         {
             get
             {
-                return accHolderName;
+                return cust.Name;
             }
         }
 
@@ -46,7 +46,7 @@ namespace BankAccountTypes
 
         public override string ToString()
         {
-            return String.Format("Account({0}, {1}, {2:C})", accNumber, accHolderName, balance);
+            return String.Format("Account({0}, {1}, {2:C})", AccNo, AccHolderName, Bal);
         }
 
         public void Withdraw(double amt)

@@ -4,7 +4,7 @@ namespace BankAccountTypes
 {
     class CurrentAccount: SavingsAccount
     {
-        public CurrentAccount(string aN, string aHN, double bal) : base(aN, aHN, bal) {}
+        public CurrentAccount(string aN, Customer cust, double bal) : base(aN, cust, bal) {}
 
         public override double Interest
         {
@@ -16,7 +16,7 @@ namespace BankAccountTypes
 
         public override string ToString()
         {
-            return String.Format(String.Format("CurrentAccount({0}, {1}, {2:C})", accNumber, accHolderName, Bal));
+            return String.Format(String.Format("CurrentAccount({0}, {1}, {2:C})", AccNo, AccHolderName, Bal));
         }
     }
 }

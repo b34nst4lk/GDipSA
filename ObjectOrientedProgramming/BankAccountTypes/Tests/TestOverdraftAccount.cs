@@ -168,5 +168,14 @@ namespace BankAccountTypes.Tests
 
             Assert.AreEqual(correctAmountAfterInterestCredit, negAcc.Bal);
         }
+
+        // ChangeCustomer()
+        [TestCase]
+        public void TestThatCustomerOfAccountUpdatedAfterChanging()
+        {
+            posAcc.ChangeCustomer(c2);
+
+            Assert.AreEqual(c2, posAcc.Cust);
+        }
     }
 }

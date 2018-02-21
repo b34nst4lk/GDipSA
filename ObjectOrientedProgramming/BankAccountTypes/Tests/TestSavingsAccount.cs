@@ -151,6 +151,7 @@ namespace BankAccountTypes
             Assert.AreEqual(acc.Bal, correctAccBal);
         }
 
+        [TestCase]
         public void TestThatTransferDepositFailsWhenAmtMoreThanBalance()
         {
             double transferAmt = r.NextDouble() * 1000 + acc.Bal;
@@ -181,6 +182,15 @@ namespace BankAccountTypes
             acc.CreditInterest();
 
             Assert.AreEqual(acc.Bal, correctAmountAfterInterestCredit);
+        }
+
+        // ChangeCustomer()
+        [TestCase]
+        public void TestThatCustomerOfAccountUpdatedAfterChanging()
+        {
+            acc.ChangeCustomer(c2);
+
+            Assert.AreEqual(c2, acc.Cust);
         }
     }
 }

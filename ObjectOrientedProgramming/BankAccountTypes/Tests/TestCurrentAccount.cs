@@ -189,5 +189,14 @@ namespace BankAccountTypes
 
             Assert.AreEqual(acc.Bal, correctAmountAfterInterestCredit);
         }
+
+        // ChangeCustomer()
+        [TestCase]
+        public void TestThatCustomerOfAccountUpdatedAfterChanging()
+        {
+            acc.ChangeCustomer(c2);
+
+            Assert.AreEqual(c2, acc.Cust);
+        }
     }
 }

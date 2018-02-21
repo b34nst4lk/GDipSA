@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 
 namespace BankAccountTypes.Tests
@@ -12,6 +10,7 @@ namespace BankAccountTypes.Tests
         Customer custEmail;
         Customer custNo;
         Customer custContact;
+        Customer custWithAcc;
 
         SavingsAccount acc;
 
@@ -22,8 +21,9 @@ namespace BankAccountTypes.Tests
             custEmail = new Customer("0001", "Tan", new DateTime(1997, 1, 1), "js@a.com");
             custNo = new Customer("0001", "Tan", new DateTime(1997, 1, 1), "92345678");
             custContact = new Customer("0001", "Tan", new DateTime(1997, 1, 1),"92345678" ,"js@a.com");
+            custWithAcc = new Customer("0001", "Tan", new DateTime(1997, 1, 1));
 
-            acc = new SavingsAccount("1", cust, 2000);
+            acc = new SavingsAccount("1", custWithAcc, 2000);
         }
 
         [TearDown]

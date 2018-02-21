@@ -7,8 +7,9 @@ namespace BankAccountTypes
         public SavingsAccount(string aN, Customer cust, double bal)
         {
             accNumber = aN;
-            this.cust = cust;
             Deposit(bal);
+            ChangeCustomer(cust);
+            cust.AddAccount(this);
         }
 
         public override double Interest

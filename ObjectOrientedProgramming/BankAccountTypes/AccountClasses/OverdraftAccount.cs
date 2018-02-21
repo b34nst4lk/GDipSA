@@ -11,7 +11,8 @@ namespace BankAccountTypes
         public OverdraftAccount(string aN, Customer cust, double bal)
         {
             accNumber = aN;
-            this.cust = cust;
+            ChangeCustomer(cust);
+            cust.AddAccount(this);
             if (bal > 0)
             {
                 Deposit(bal);

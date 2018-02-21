@@ -75,5 +75,10 @@ namespace BankAccountTypes
             CalculateInterest();
             balance += interestAmt;
         }
+
+        public void ChangeCustomer(Customer cust)
+        {
+            this.cust = cust;
+        }
     }
 }

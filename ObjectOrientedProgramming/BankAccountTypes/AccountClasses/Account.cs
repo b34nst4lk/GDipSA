@@ -2,22 +2,12 @@
 
 namespace BankAccountTypes
 {
-    class Account
+    abstract class Account
     {
         protected string accNumber;
         protected string accHolderName;
         protected double balance;
-        protected static double interest = 0.01;
         protected double interestAmt;
-
-        public Account() { } 
-
-        public Account(string aN, string aHN, double bal)
-        {
-            accNumber = aN;
-            accHolderName = aHN;
-            Deposit(bal);
-        }
 
         public string AccNo
         {
@@ -43,13 +33,7 @@ namespace BankAccountTypes
             }
         }
 
-        public virtual double Interest
-        {
-            get
-            {
-                return interest;
-            }
-        }
+        public abstract double Interest;
 
         public double InterestAmt
         {

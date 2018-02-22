@@ -12,6 +12,8 @@ namespace BankAccountTypes
         Customer c;
         Customer c2;
 
+        BankBranch branch;
+
         Random r = new Random();
 
         [SetUp]
@@ -21,6 +23,7 @@ namespace BankAccountTypes
             c2 = new Customer("1", "Lim", new DateTime(1996, 1, 1));
             acc = new CurrentAccount("000-001", c, 2000);
             targetAcc = new CurrentAccount("000-002", c2, 3000);
+            branch = new BankBranch("JE", "012", "Teo");
         }
 
         [TearDown]
@@ -46,7 +49,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestAccountBalanceConstructor()
         {
-            Assert.AreEqual(2000, acc.Bal);
+            Assert.IsNull(acc.Branch);
         }
 
         //Interest
@@ -64,7 +67,6 @@ namespace BankAccountTypes
 
             Assert.AreEqual(acc.ToString(), correctString);
         }
-
 
         // Withdraw()
         [TestCase]
@@ -197,6 +199,15 @@ namespace BankAccountTypes
             acc.ChangeCustomer(c2);
 
             Assert.AreEqual(c2, acc.Cust);
+        }
+
+        // ChangeBranch()
+        [TestCase]
+        public void TestThatBranchIsAssignedAfterChanging()
+        {
+            acc.ChangeBranch(branch);
+
+            Assert.AreEqual(branch, acc.Branch);
         }
     }
 }

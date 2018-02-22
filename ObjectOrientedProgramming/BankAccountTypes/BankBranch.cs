@@ -65,12 +65,30 @@ namespace BankAccountTypes
 
         public bool AddAccount(Account acc)
         {
-            return accounts.Add(acc);
+            bool accountAdded = accounts.Add(acc);
+            if (accountAdded)
+            {
+                acc.ChangeBranch(this);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool RemoveAccount(Account acc)
         {
-            return accounts.Remove(acc);
+            bool accountRemoved = accounts.Remove(acc);
+            if (accountRemoved)
+            {
+                acc.ChangeBranch(null);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool IfAccountInBranch(Account acc)

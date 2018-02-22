@@ -12,6 +12,8 @@ namespace BankAccountTypes
         Customer c;
         Customer c2;
 
+        BankBranch branch;
+
         Random r = new Random();
 
         [SetUp]
@@ -22,6 +24,8 @@ namespace BankAccountTypes
 
             acc = new SavingsAccount("000-001", c, 2000);
             targetAcc = new SavingsAccount("000-002", c2, 3000);
+
+            branch = new BankBranch("JE", "012", "Teo");
         }
 
         [TearDown]
@@ -191,6 +195,15 @@ namespace BankAccountTypes
             acc.ChangeCustomer(c2);
 
             Assert.AreEqual(c2, acc.Cust);
+        }
+
+        // ChangeBranch()
+        [TestCase]
+        public void TestThatBranchIsAssignedAfterChanging()
+        {
+            acc.ChangeBranch(branch);
+
+            Assert.AreEqual(branch, acc.Branch);
         }
     }
 }

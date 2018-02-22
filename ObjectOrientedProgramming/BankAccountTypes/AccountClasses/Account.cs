@@ -8,6 +8,7 @@ namespace BankAccountTypes
         protected string accNumber;
         protected Customer cust;
         protected double interestAmt;
+        protected BankBranch branch;
 
         public string AccNo
         {
@@ -38,6 +39,14 @@ namespace BankAccountTypes
             get
             {
                 return balance;
+            }
+        }
+
+        public BankBranch Branch
+        {
+            get
+            {
+                return branch;
             }
         }
 
@@ -87,6 +96,11 @@ namespace BankAccountTypes
         public void ChangeCustomer(Customer cust)
         {
             this.cust = cust;
+        }
+
+        public void ChangeBranch(BankBranch branch)
+        {
+            this.branch = branch;
         }
     }
 }

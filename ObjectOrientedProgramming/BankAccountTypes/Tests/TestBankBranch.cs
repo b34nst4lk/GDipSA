@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace BankAccountTypes.Tests
@@ -90,12 +88,21 @@ namespace BankAccountTypes.Tests
 
             Assert.IsTrue(rv);
         }
-
+        
+        [TestCase]
         public void TestAccountInBankBranchAfterAdding()
         {
             branch.AddAccount(sAcc);
 
             Assert.IsTrue(branch.Accounts.Contains(sAcc));
+        }
+
+        [TestCase]
+        public void TestThatAccountAssignedToBranchAfterAdding()
+        {
+            branch.AddAccount(sAcc);
+
+            Assert.AreEqual(branch, sAcc.Branch);
         }
 
         [TestCase]
@@ -269,7 +276,5 @@ namespace BankAccountTypes.Tests
 
             Assert.AreEqual(correctSum, totalBalance);
         }
-
-
     }
 }

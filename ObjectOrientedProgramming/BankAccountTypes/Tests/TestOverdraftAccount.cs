@@ -13,6 +13,7 @@ namespace BankAccountTypes.Tests
         Customer c;
         Customer c2;
 
+        BankBranch branch;
 
         [SetUp]
         public void SetUp()
@@ -23,6 +24,8 @@ namespace BankAccountTypes.Tests
             posAcc = new OverdraftAccount("000-001", c, 2000);
             negAcc = new OverdraftAccount("000-001", c2, -3000);
             targetAcc = new OverdraftAccount("000-002", c, 3000);
+
+            branch = new BankBranch("JE", "012", "Teo");
         }
 
         [TearDown]
@@ -176,6 +179,15 @@ namespace BankAccountTypes.Tests
             posAcc.ChangeCustomer(c2);
 
             Assert.AreEqual(c2, posAcc.Cust);
+        }
+
+        // ChangeBranch()
+        [TestCase]
+        public void TestThatBranchIsAssignedAfterChanging()
+        {
+            posAcc.ChangeBranch(branch);
+
+            Assert.AreEqual(branch, posAcc.Branch);
         }
     }
 }

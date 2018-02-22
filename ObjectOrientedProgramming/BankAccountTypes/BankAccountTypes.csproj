@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountClasses\Account.cs" />
+    <Compile Include="AccountClasses\AccountExceptions.cs" />
     <Compile Include="AccountClasses\CurrentAccount.cs" />
     <Compile Include="AccountClasses\OverdraftAccount.cs" />
     <Compile Include="BankBranch.cs" />

@@ -93,26 +93,13 @@ namespace BankAccountTypes
         }
 
         [TestCase]
-        public void TestForFailedWithdrawalWhenAmtMoreThanBalance()
-        {
-            int accBal = (int)acc.Bal;
-            double withdrawAmt = r.Next(accBal + 1, accBal+1000);
-            double correctBalance = acc.Bal;
-
-            acc.Withdraw(withdrawAmt);
-
-            Assert.AreEqual(correctBalance, acc.Bal);
-        }
-
-        [TestCase]
-        public void TestThatFailedWithdrawalReturnsFalse()
+        public void TestForInsufficientFundsThrownWithdrawalWhenAmtMoreThanBalance()
         {
             int accBal = (int)acc.Bal;
             double withdrawAmt = r.Next(accBal + 1, accBal+1000);
 
-            bool rv = acc.Withdraw(withdrawAmt);
 
-            Assert.IsFalse(rv);
+            Assert.Throws<InsufficientFunds>(() => acc.Withdraw(withdrawAmt));
         }
 
         // Deposit()
@@ -155,9 +142,7 @@ namespace BankAccountTypes
             double transferAmt = r.NextDouble() * 1000 + acc.Bal;
             double correctAccBal = acc.Bal;
 
-            acc.TransferTo(transferAmt, targetAcc);
-
-            Assert.AreEqual(acc.Bal, correctAccBal);
+            Assert.Throws<InsufficientFunds>(() => acc.TransferTo(transferAmt, targetAcc));
         }
 
         public void TestThatTransferDepositFailsWhenAmtMoreThanBalance()

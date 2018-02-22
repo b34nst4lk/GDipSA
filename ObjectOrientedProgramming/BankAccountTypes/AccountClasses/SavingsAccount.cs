@@ -30,8 +30,7 @@ namespace BankAccountTypes
         {
             if (amt > Bal)
             {
-                Console.WriteLine("There is insufficient funds in your account");
-                return false;
+                throw new InsufficientFunds();
             }
             else
             {

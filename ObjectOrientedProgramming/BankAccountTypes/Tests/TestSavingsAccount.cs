@@ -88,26 +88,13 @@ namespace BankAccountTypes
         }
 
         [TestCase]
-        public void TestForFailedWithdrawalWhenAmtMoreThanBalance()
+        public void TestForInsufficientFundsThrownWithdrawalWhenAmtMoreThanBalance()
         {
             int accBal = (int)acc.Bal;
             double withdrawAmt = r.Next(accBal + 1, accBal+1000);
             double correctBalance = acc.Bal;
 
-            acc.Withdraw(withdrawAmt);
-
-            Assert.AreEqual(correctBalance, acc.Bal);
-        }
-
-        [TestCase]
-        public void TestThatFailedWithdrawalReturnsFalse()
-        {
-            int accBal = (int)acc.Bal;
-            double withdrawAmt = r.Next(accBal + 1, accBal+1000);
-
-            bool rv = acc.Withdraw(withdrawAmt);
-
-            Assert.IsFalse(rv);
+            Assert.Throws<InsufficientFunds>(() => acc.Withdraw(withdrawAmt));
         }
 
         // Deposit()
@@ -145,25 +132,12 @@ namespace BankAccountTypes
         }
         
         [TestCase]
-        public void TestThatTrasferWithdrawalFailsWhenAmtMoreThanBalance()
-        {
-            double transferAmt = r.NextDouble() * 1000 + acc.Bal;
-            double correctAccBal = acc.Bal;
-
-            acc.TransferTo(transferAmt, targetAcc);
-
-            Assert.AreEqual(acc.Bal, correctAccBal);
-        }
-
-        [TestCase]
-        public void TestThatTransferDepositFailsWhenAmtMoreThanBalance()
+        public void TestThatTransferFailsWhenAmtMoreThanBalance()
         {
             double transferAmt = r.NextDouble() * 1000 + acc.Bal;
             double correctTargetBal = targetAcc.Bal;
 
-            acc.TransferTo(transferAmt, targetAcc);
-
-            Assert.AreEqual(targetAcc.Bal, correctTargetBal);
+            Assert.Throws<InsufficientFunds>(() => acc.TransferTo(transferAmt, targetAcc));
         }
 
         //CalculateInterest()

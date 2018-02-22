@@ -48,10 +48,12 @@
     <Compile Include="AccountClasses\Account.cs" />
     <Compile Include="AccountClasses\CurrentAccount.cs" />
     <Compile Include="AccountClasses\OverdraftAccount.cs" />
+    <Compile Include="BankBranch.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AccountClasses\SavingsAccount.cs" />
+    <Compile Include="Tests\TestBankBranch.cs" />
     <Compile Include="Tests\TestCurrentAccount.cs" />
     <Compile Include="Tests\TestCustomer.cs" />
     <Compile Include="Tests\TestOverdraftAccount.cs" />

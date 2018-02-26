@@ -236,10 +236,11 @@ from Employees e
 left join Employees m on e.ReportsTo = m.EmployeeId;
 
 -- 24
-print 'Retrieve five most discounted items';
-select top 5 * 
+print 'Retrieve five most discounted products';
+select top 5 ProductId ,sum(UnitPrice * Quantity * Discount) as TotalDiscount
 from [Order Details]
-order by Discount desc;
+group by ProductId
+order by TotalDiscount desc;
 
 -- 25
 print 'Retrieve list of customers in areas with no suppliers';

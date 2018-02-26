@@ -106,6 +106,25 @@ namespace BankAccountTypes
             Assert.AreEqual(-1000, posAcc.Bal);
         }
 
+        [TestCase]
+        public void TestThatNegativeWithdrawalThrowsMustBePositiveException()
+        {
+            Assert.Throws<MustBePositive>(() => posAcc.Withdraw(-1));
+        }
+
+        [TestCase]
+        public void TestThatNegativeWithdrawalDoesNotChangeBalance()
+        {
+            double initialBal = posAcc.Bal;
+
+            try
+            {
+                posAcc.Withdraw(-1);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, posAcc.Bal);
+        }
 
         // Deposit()
         [TestCase]
@@ -118,6 +137,26 @@ namespace BankAccountTypes
             Assert.AreEqual(correctBal, posAcc.Bal);
         }
 
+        [TestCase]
+        public void TestThatNegativeDepositThrowsMustBePositiveException()
+        {
+            Assert.Throws<MustBePositive>(() => posAcc.Deposit(-1));
+        }
+
+        [TestCase]
+        public void TestThatNegativeDepositDoesNotChangeBalance()
+        {
+            double initialBal = posAcc.Bal;
+
+            try
+            {
+                posAcc.Deposit(-1);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, posAcc.Bal);
+        }
+
         // TransferTo()
         [TestCase]
         public void TestThatTransferWithdrawsFromAccount()
@@ -127,6 +166,38 @@ namespace BankAccountTypes
             posAcc.TransferTo(1000, targetAcc);
 
             Assert.AreEqual(correctAccBal, posAcc.Bal);
+        }
+
+        [TestCase]
+        public void TestThatNegativeTransferThrowsMustBePositiveException()
+        {
+            Assert.Throws<MustBePositive>(() => posAcc.TransferTo(-1, targetAcc));
+        }
+
+        [TestCase]
+        public void TestThatNegativeTransferDoesNotWithdrawMoneyFromAcc()
+        {
+            double initialBal = posAcc.Bal;
+            try
+            {
+                posAcc.TransferTo(-1, targetAcc);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, posAcc.Bal);
+        }
+
+        [TestCase]
+        public void TestThatNegativeTransferDoesNotDepositMoneyIntoTargetAcc()
+        {
+            double initialBal = targetAcc.Bal;
+            try
+            {
+                posAcc.TransferTo(-1, targetAcc);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, targetAcc.Bal);
         }
 
         //CalculateInterest()

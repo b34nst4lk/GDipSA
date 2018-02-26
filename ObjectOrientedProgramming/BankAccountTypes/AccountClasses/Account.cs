@@ -66,20 +66,42 @@ namespace BankAccountTypes
             return String.Format("Account({0}, {1}, {2:C})", AccNo, AccHolderName, Bal);
         }
 
-        public void Withdraw(double amt)
+        public virtual void Withdraw(double amt)
         {
-            balance -= Math.Max(amt, 0);
+            if (amt <= 0)
+            {
+                throw new MustBePositive("Withdrawals must be positive.");
+            }
+            else
+            {
+                balance -= amt;
+            }
         }
 
-        public void Deposit(double amt)
+        public virtual void Deposit(double amt)
         {
-            balance += Math.Max(amt, 0);
+            if (amt <= 0)
+            {
+                throw new MustBePositive("Deposits must be positive.");
+            }
+            else
+            {
+                balance += Math.Max(amt, 0);
+            }
         }
 
-        public void TransferTo(double amt, Account target)
+        public virtual void TransferTo(double amt, Account target)
         {
-            Withdraw(amt);
-            target.Deposit(amt);
+            try
+            {
+                Withdraw(amt);
+                target.Deposit(amt);
+            }
+            catch (MustBePositive)
+            {
+                throw new MustBePositive("Transfer made must be positive");
+            }
+
         }
 
         public void CalculateInterest()

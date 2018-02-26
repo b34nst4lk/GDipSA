@@ -72,8 +72,7 @@ namespace BankAccountTypes
         [TestCase]
         public void TestForSuccessfulWithdrawWhenAmtLessThanBalance()
         {
-            int accBal = (int)acc.Bal;
-            double withdrawAmt = r.Next(1, accBal);
+            double withdrawAmt = acc.Bal - 1;
             double correctBalance = acc.Bal - withdrawAmt;
 
             acc.Withdraw(withdrawAmt);
@@ -82,24 +81,48 @@ namespace BankAccountTypes
         }
 
         [TestCase]
-        public void TestThatSuccessfulWithdrawalReturnsTrue()
+        public void TestForInsufficientFundsThrownWithdrawalWhenAmtMoreThanBalance()
         {
-            int accBal = (int)acc.Bal;
-            double withdrawAmt = r.Next(1, accBal);
+            double withdrawAmt = acc.Bal + 1;
+            double correctBalance = acc.Bal;
 
-            bool rv = acc.Withdraw(withdrawAmt);
-
-            Assert.IsTrue(rv);
+            Assert.Throws<InsufficientFunds>(() => acc.Withdraw(withdrawAmt));
         }
 
         [TestCase]
-        public void TestForInsufficientFundsThrownWithdrawalWhenAmtMoreThanBalance()
+        public void TestThatBalanceUnachangedAfterFailedWithdrawal()
         {
-            int accBal = (int)acc.Bal;
-            double withdrawAmt = r.Next(accBal + 1, accBal+1000);
+            double initialBal = acc.Bal;
+            double withdrawAmt = acc.Bal + 1;
+            double correctBalance = acc.Bal;
 
+            try
+            {
+                acc.Withdraw(withdrawAmt);
+            }
+            catch { }
 
-            Assert.Throws<InsufficientFunds>(() => acc.Withdraw(withdrawAmt));
+            Assert.AreEqual(initialBal, acc.Bal);
+        }
+
+        [TestCase]
+        public void TestThatNegativeWithdrawalThrowsMustBePositiveException()
+        {
+            Assert.Throws<MustBePositive>(() => acc.Withdraw(-1));
+        }
+
+        [TestCase]
+        public void TestThatNegativeWithdrawalDoesNotChangeBalance()
+        {
+            double initialBal = acc.Bal;
+
+            try
+            {
+                acc.Withdraw(-1);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, acc.Bal);
         }
 
         // Deposit()
@@ -114,6 +137,27 @@ namespace BankAccountTypes
             Assert.AreEqual(acc.Bal, correctBal);
         }
 
+        [TestCase]
+        public void TestThatNegativeDepositThrowsMustBePositiveException()
+        {
+            Assert.Throws<MustBePositive>(() => acc.Deposit(-1));
+        }
+
+        [TestCase]
+        public void TestThatNegativeDepositDoesNotChangeBalance()
+        {
+            double initialBal = acc.Bal;
+
+            try
+            {
+                acc.Deposit(-1);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, acc.Bal);
+        }
+
+
         // TransferTo()
         [TestCase]
         public void TestThatTransferWithdrawsFromAccountWhenAmtLessThanBalance()
@@ -125,6 +169,7 @@ namespace BankAccountTypes
 
             Assert.AreEqual(acc.Bal, correctAccBal);
         }
+
         [TestCase]
         public void TestThatTransferDepositsToTargetAccountWhenAmtLessThanBalance()
         {
@@ -137,22 +182,44 @@ namespace BankAccountTypes
         }
         
         [TestCase]
-        public void TestThatTrasferWithdrawalFailsWhenAmtMoreThanBalance()
-        {
-            double transferAmt = r.NextDouble() * 1000 + acc.Bal;
-            double correctAccBal = acc.Bal;
-
-            Assert.Throws<InsufficientFunds>(() => acc.TransferTo(transferAmt, targetAcc));
-        }
-
-        public void TestThatTransferDepositFailsWhenAmtMoreThanBalance()
+        public void TestThatTransferFailsWhenAmtMoreThanBalance()
         {
             double transferAmt = r.NextDouble() * 1000 + acc.Bal;
             double correctTargetBal = targetAcc.Bal;
 
-            acc.TransferTo(transferAmt, targetAcc);
+            Assert.Throws<InsufficientFunds>(() => acc.TransferTo(transferAmt, targetAcc));
+        }
 
-            Assert.AreEqual(targetAcc.Bal, correctTargetBal);
+        [TestCase]
+        public void TestThatNegativeTransferThrowsMustBePositiveException()
+        {
+            Assert.Throws<MustBePositive>(() => acc.TransferTo(-1, targetAcc));
+        }
+
+        [TestCase]
+        public void TestThatNegativeTransferDoesNotWithdrawMoneyFromAcc()
+        {
+            double initialBal = acc.Bal;
+            try
+            {
+                acc.TransferTo(-1, targetAcc);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, acc.Bal);
+        }
+
+        [TestCase]
+        public void TestThatNegativeTransferDoesNotDepositMoneyIntoTargetAcc()
+        {
+            double initialBal = targetAcc.Bal;
+            try
+            {
+                acc.TransferTo(-1, targetAcc);
+            }
+            catch { }
+
+            Assert.AreEqual(initialBal, targetAcc.Bal);
         }
 
         //CalculateInterest()

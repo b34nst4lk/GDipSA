@@ -26,7 +26,7 @@ namespace BankAccountTypes
             return String.Format(String.Format("SavingsAccount({0}, {1}, {2:C})", AccNo, AccHolderName, Bal));
         }
 
-        public new bool Withdraw(double amt)
+        public override void Withdraw(double amt)
         {
             if (amt > Bal)
             {
@@ -35,15 +35,19 @@ namespace BankAccountTypes
             else
             {
                 base.Withdraw(amt);
-                return true;
             }
         }
 
-        public new void TransferTo(double amt, Account targetAcc)
+        public override void TransferTo(double amt, Account targetAcc)
         {
-            if (Withdraw(amt))
+            try
             {
+                Withdraw(amt);
                 targetAcc.Deposit(amt);
+            }
+            catch (InsufficientFunds)
+            {
+                throw new InsufficientFunds("Transfer failed due to insufficient funds");
             }
         }
     }

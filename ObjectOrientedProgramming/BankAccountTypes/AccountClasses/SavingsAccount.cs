@@ -30,7 +30,7 @@ namespace BankAccountTypes
         {
             if (amt > Bal)
             {
-                throw new InsufficientFunds();
+                throw new InsufficientFunds("Withdrawing more funds than available in balance");
             }
             else
             {

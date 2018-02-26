@@ -312,14 +312,10 @@ where UnitPrice >
 
 -- 30
 print 'List all orders above $10000';
-select o.* 
-from 
-(
-	select OrderId, sum(UnitPrice * Quantity) as TotalOrderPrice
-	from [Order Details]
-	group by OrderId
-) o
-where TotalOrderPrice > 10000
+select OrderId, sum(UnitPrice * Quantity) as TotalOrderPrice
+from [Order Details]
+group by OrderId
+having sum(UnitPrice * Quantity) > 10000
 
 -- 31
 print 'List all orders id and customer id of orders above $10000';
@@ -333,7 +329,6 @@ from
 join Orders o on d.OrderID = o.OrderId
 where TotalOrderPrice > 10000
 
-
 -- 32
 print 'List all orders id and customer id and name of orders above $10000';
 select d.OrderId, o.CustomerId, c.CompanyName
@@ -342,10 +337,10 @@ from
 	select OrderId, sum(UnitPrice * Quantity) as TotalOrderPrice
 	from [Order Details]
 	group by OrderId
+	having sum(UnitPrice * Quantity) > 10000
 ) d 
 join Orders o on d.OrderID = o.OrderId
-join Customers c on o.CustomerId = c.CustomerId
-where TotalOrderPrice > 10000
+join Customers c on o.CustomerId = c.CustomerId;
 
 -- 33
 print 'Total price of all orders by customers';
@@ -376,36 +371,25 @@ from
 -- 35
 print 'List customer id and name with total order value more than average';
 
-select x.CustomerId, c.CompanyName
-from 
+select o.CustomerId, c.CompanyName, sum(d.UnitPrice * d.Quantity) as TotalCustValue
+from [Order Details] d
+join Orders o on o.OrderId = d.OrderId
+join Customers c on o.CustomerId = c.CustomerId
+group by o.CustomerId, c.CompanyName
+having sum(d.UnitPrice * d.Quantity) > 
 (
-	select o.CustomerId, sum(o.UnitPrice * o.Quantity) as TotalPrice 
-	from 
+	select avg(x.TotalCustValue)
+	from
 	(
-		select d.OrderId, d.UnitPrice, d.Quantity, o.CustomerId
+		select sum(d.UnitPrice * d.Quantity) as TotalCustValue
 		from [Order Details] d
-		join Orders o on d.OrderId = o.OrderId
-	) o
-	group by o.CustomerId
-) x 
-join Customers c on x.CustomerId = c.CustomerId
-where x.TotalPrice >
-(
-	select avg(a.TotalPrice) as AvgOrderValueByCustomer
-	from 
-	(
-		select o.CustomerId, sum(o.UnitPrice * o.Quantity) as TotalPrice 
-		from 
-		(
-			select d.OrderId, d.UnitPrice, d.Quantity, o.CustomerId
-			from [Order Details] d
-			join Orders o on d.OrderId = o.OrderId
-		) o
+		join Orders o on o.OrderId = d.OrderId
 		group by o.CustomerId
-	) a
-);
+	) x
+)
 
 -- 36
+print 'List customer id and total order value of each customer in 1997';
 select o.CustomerId, sum(o.UnitPrice * o.Quantity) as TotalPrice 
 from 
 (

@@ -4,6 +4,9 @@ print 'Cleaning up'
 drop table GoodCustomers;
 drop table MemberCategories;
 
+update Customers
+set FaxNumber = null;
+
 -- 1
 print 'Create Member Catergories table';
 create table MemberCategories
@@ -151,12 +154,25 @@ print 'Add new FaxNo variable to GoodCustomers';
 alter table GoodCustomers
 add FaxNo nvarchar(25);
 
+-- add fake FaxNumber to Customers table
+update Customers
+set FaxNumber = abs(checksum(newID())) % 10000;
+
+-- fill GoodCustomers table with FaxNumbers from Customers table
 update GoodCustomers
 set FaxNo = c.FaxNumber
 from Customers c 
 join GoodCustomers g
 on c.CustomerName = g.CustomerName
 and c.PhoneNumber = g.PhoneNumber;
+
+-- compare the fax numbers from both tables. below query should be empty.
+select g.CustomerName, g.FaxNo, c.FaxNumber
+from Customers c
+join GoodCustomers g
+on c.CustomerName = g.CustomerName
+and c.PhoneNumber = g.PhoneNumber
+and c.FaxNumber != g.FaxNo;
 
 -- Check if new column added correctly
 select top 10 * from GoodCustomers;
@@ -210,3 +226,6 @@ select * from GoodCustomers;
 print 'Cleaning up'
 drop table GoodCustomers;
 drop table MemberCategories;
+
+update Customers
+set FaxNumber = null;

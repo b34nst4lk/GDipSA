@@ -149,7 +149,7 @@ print 'Count orders made, IDs and Company Names of all customers that made more 
 select o.CustomerId, c.CompanyName, o.OrderCount
 from 
 	Customers c 
-left join 
+join 
 	(select CustomerId, count(OrderId) as OrderCount
 	from Orders 
 	group by CustomerId) o
@@ -157,25 +157,35 @@ on c.CustomerId = o.CustomerId
 where o.OrderCount > 10
 order by OrderCount desc;
 
+-- alternative method. Note that this method works here as CustomerId and CompanyName have a
+-- one-to-one relationship. Will not work otherwise.
+
+select o.CustomerId, c.CompanyName, count(distinct o.OrderId) as OrderCount
+from Customers c
+join Orders o
+on o.CustomerId = c.CustomerId
+group by o.CustomerId, c.CompanyName
+having count(distinct o.OrderId) > 10
+
 -- 19b
 print 'Count orders made, retrieve ID and Company name of for customerId = ''BONAP''';
 select o.CustomerId, c.CompanyName, o.OrderCount
 from 
 	Customers c 
-left join 
+join 
 	(select CustomerId, count(OrderId) as OrderCount
 	from Orders 
 	group by CustomerId) o
 on c.CustomerId = o.CustomerId
 where c.CustomerId = 'BONAP'
-order by OrderCount desc;
+
 
 -- 19c
 print 'Count orders made, retrieve ID and company name of customers with more orders than ''BONAP''';
 select o.CustomerId, c.CompanyName, o.OrderCount
 from 
 	Customers c 
-left join 
+join 
 (	
 	select CustomerId, count(OrderId) as OrderCount
 	from Orders 
@@ -225,15 +235,15 @@ where Country = 'USA';
 print 'Retrieve orders administered by Sales Representative and shipped by United Package';
 select o.* 
 from Orders o
-left join Employees e on o.EmployeeId = e.EmployeeId
-left join Shippers s on o.ShipVia = s.ShipperId
+join Employees e on o.EmployeeId = e.EmployeeId
+join Shippers s on o.ShipVia = s.ShipperId
 where e.Title = 'Sales Representative' and s.CompanyName = 'United Package';
 
 -- 23
 print 'Retrieve names of employees and their manager';
 select Concat(e.FirstName, ' ', e.LastName) as EmployeeName, Concat(m.FirstName, ' ', m.LastName)
 from Employees e
-left join Employees m on e.ReportsTo = m.EmployeeId;
+join Employees m on e.ReportsTo = m.EmployeeId;
 
 -- 24
 print 'Retrieve five most discounted products';
@@ -251,6 +261,14 @@ where City not in
 	select distinct City
 	from Suppliers
 );
+
+-- alternative method. This method returns 78 rows rather than 77 as it includes
+-- Customers whose City is null.
+select c.CompanyName, s.City, c.City
+from Customers c
+left outer join Suppliers s 
+on c.City = s.City
+where s.City is null;
 
 -- 26
 print 'List all cities with customers and suppliers';

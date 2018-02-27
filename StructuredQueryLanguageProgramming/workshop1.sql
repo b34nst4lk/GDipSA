@@ -149,7 +149,7 @@ print 'Count orders made, IDs and Company Names of all customers that made more 
 select o.CustomerId, c.CompanyName, o.OrderCount
 from 
 	Customers c 
-left join 
+join 
 	(select CustomerId, count(OrderId) as OrderCount
 	from Orders 
 	group by CustomerId) o
@@ -157,25 +157,27 @@ on c.CustomerId = o.CustomerId
 where o.OrderCount > 10
 order by OrderCount desc;
 
+-- try using count distinct
+
 -- 19b
 print 'Count orders made, retrieve ID and Company name of for customerId = ''BONAP''';
 select o.CustomerId, c.CompanyName, o.OrderCount
 from 
 	Customers c 
-left join 
+join 
 	(select CustomerId, count(OrderId) as OrderCount
 	from Orders 
 	group by CustomerId) o
 on c.CustomerId = o.CustomerId
 where c.CustomerId = 'BONAP'
-order by OrderCount desc;
+
 
 -- 19c
 print 'Count orders made, retrieve ID and company name of customers with more orders than ''BONAP''';
 select o.CustomerId, c.CompanyName, o.OrderCount
 from 
 	Customers c 
-left join 
+join 
 (	
 	select CustomerId, count(OrderId) as OrderCount
 	from Orders 
@@ -225,15 +227,15 @@ where Country = 'USA';
 print 'Retrieve orders administered by Sales Representative and shipped by United Package';
 select o.* 
 from Orders o
-left join Employees e on o.EmployeeId = e.EmployeeId
-left join Shippers s on o.ShipVia = s.ShipperId
+join Employees e on o.EmployeeId = e.EmployeeId
+join Shippers s on o.ShipVia = s.ShipperId
 where e.Title = 'Sales Representative' and s.CompanyName = 'United Package';
 
 -- 23
 print 'Retrieve names of employees and their manager';
 select Concat(e.FirstName, ' ', e.LastName) as EmployeeName, Concat(m.FirstName, ' ', m.LastName)
 from Employees e
-left join Employees m on e.ReportsTo = m.EmployeeId;
+join Employees m on e.ReportsTo = m.EmployeeId;
 
 -- 24
 print 'Retrieve five most discounted products';

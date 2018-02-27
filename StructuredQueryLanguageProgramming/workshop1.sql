@@ -157,7 +157,15 @@ on c.CustomerId = o.CustomerId
 where o.OrderCount > 10
 order by OrderCount desc;
 
--- try using count distinct
+-- alternative method. Note that this method works here as CustomerId and CompanyName have a
+-- one-to-one relationship. Will not work otherwise.
+
+select o.CustomerId, c.CompanyName, count(distinct o.OrderId) as OrderCount
+from Customers c
+join Orders o
+on o.CustomerId = c.CustomerId
+group by o.CustomerId, c.CompanyName
+having count(distinct o.OrderId) > 10
 
 -- 19b
 print 'Count orders made, retrieve ID and Company name of for customerId = ''BONAP''';
@@ -253,6 +261,14 @@ where City not in
 	select distinct City
 	from Suppliers
 );
+
+-- alternative method. This method returns 78 rows rather than 77 as it includes
+-- Customers whose City is null.
+select c.CompanyName, s.City, c.City
+from Customers c
+left outer join Suppliers s 
+on c.City = s.City
+where s.City is null;
 
 -- 26
 print 'List all cities with customers and suppliers';

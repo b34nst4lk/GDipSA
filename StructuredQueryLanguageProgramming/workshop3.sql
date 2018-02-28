@@ -1,7 +1,11 @@
 use northwind;
 -- Clean up
 drop view Customer1998;
-drop view TotalBusiness
+drop view TotalBusiness;
+drop table testProducts;
+drop table testCategories;
+drop view testCategoryView;
+drop view testCatProductView;
 -- 1
 go
 create view Customer1998 as
@@ -65,6 +69,81 @@ print 'Using TotalBusiness view, get average business by customers';
 select avg(TotalBusiness) as AvgBusiness
 from TotalBusiness
 
+---------------------------------------------------------------
+-- Experiment on updating a user view which joins two tables --
+---------------------------------------------------------------
+--- Create two duplicate tables
+go
+Create table testCategories
+(
+	CategoryId	int		not null,
+	CategoryName	nvarchar(50)	not null,
+	primary key (CategoryId)
+)
+go
+Create table testProducts
+(
+	ProductId	int		not null,
+	ProductName	nvarchar(40) 	not null,
+	CategoryID	int		null,
+	primary key (ProductId),
+	foreign key (CategoryId) references testCategories (CategoryId) on update cascade
+)
+go
+
+--- Insert rows into tables
+insert into testCategories
+	select CategoryId, CategoryName from Categories;
+insert into testProducts
+	select ProductId, ProductName, CategoryId from Products;
+
+--- Test to see that tables are successfully created
+select * from testProducts;
+select * from testCategories;
+
+--- Create view with only one table
+go
+create view testCategoryView as
+	select * from testCategories;
+go
+
+--- Test view
+select * from testCategoryView;
+
+--- #Experiment 1: Test updating of view created from one table
+update testCategoryView
+	set CategoryId = 20
+	where categoryId = 8;
+
+--- see results of updates
+select * from testCategoryView;
+select * from testCategories;
+select * from testProducts where CategoryId = 20;
+
+--- create view by joining 2 tables
+go
+create view testCatProductView as
+	select c.CategoryId, c.CategoryName, p.ProductName
+	from testCategories c, testProducts p
+	where c.CategoryId = p.CategoryId;
+go
+
+select * from testCatProductView;
+
+--- #Experiment 2: Test updating of view created from joining two tables
+update testCatProductView
+set CategoryId = 10, CategoryName = 'Sea food', ProductName = 'Rotten Seafood'
+where CategoryId = 20;
+
+--- see results of updates
+
+select * from testCatProductView;
+
 -- Clean up
 drop view Customer1998;
-drop view TotalBusiness
+drop view TotalBusiness;
+drop view TestCategory;
+drop table testProducts;
+drop table testCategories;
+drop view testCategoryView;
+drop view testCatProductView;

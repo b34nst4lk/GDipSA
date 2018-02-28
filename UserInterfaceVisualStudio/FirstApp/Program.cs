@@ -14,6 +14,7 @@ namespace FirstApp
         [STAThread]
         static void Main()
         {
+            Console.WriteLine("StartConsole");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

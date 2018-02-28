@@ -27,6 +27,11 @@ namespace FirstApp
         private void button1_Click(object sender, EventArgs e)
         {
             previousForm.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MainMenu f = new MainMenu();
             Hide();
         }
     }

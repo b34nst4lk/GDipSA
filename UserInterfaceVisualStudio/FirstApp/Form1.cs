@@ -47,10 +47,5 @@ namespace FirstApp
             string test = String.Format("Time to see how this works:\n-{0}\n{1}\n{2}", button1.Text, shockButton.RightToLeft, Text);
             MessageBox.Show(test);
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

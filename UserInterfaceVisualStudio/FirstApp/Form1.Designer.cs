@@ -37,11 +37,11 @@
             // 
             // shockButton
             // 
-            this.shockButton.Location = new System.Drawing.Point(365, 8);
+            this.shockButton.Location = new System.Drawing.Point(360, 16);
             this.shockButton.Name = "shockButton";
-            this.shockButton.Size = new System.Drawing.Size(136, 36);
+            this.shockButton.Size = new System.Drawing.Size(136, 24);
             this.shockButton.TabIndex = 0;
-            this.shockButton.Text = "gt";
+            this.shockButton.Text = "Apply Electric Shock";
             this.shockButton.UseVisualStyleBackColor = true;
             this.shockButton.Click += new System.EventHandler(this.button1_Click);
             this.shockButton.MouseEnter += new System.EventHandler(this.Form1_Load);
@@ -58,9 +58,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(507, 12);
+            this.button1.Location = new System.Drawing.Point(504, 16);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 30);
+            this.button1.Size = new System.Drawing.Size(173, 26);
             this.button1.TabIndex = 0;
             this.button1.Text = "Turn back before it is too late";
             this.button1.UseVisualStyleBackColor = true;
@@ -69,9 +69,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(686, 12);
+            this.button3.Location = new System.Drawing.Point(686, 16);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 30);
+            this.button3.Size = new System.Drawing.Size(106, 26);
             this.button3.TabIndex = 0;
             this.button3.Text = "I ran out of ideas.";
             this.button3.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(800, 12);
+            this.button4.Location = new System.Drawing.Point(800, 16);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(106, 30);
+            this.button4.Size = new System.Drawing.Size(106, 26);
             this.button4.TabIndex = 0;
             this.button4.Text = "We\'ve gone too far";
             this.button4.UseVisualStyleBackColor = true;

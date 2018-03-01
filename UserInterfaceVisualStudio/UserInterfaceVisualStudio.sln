@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstWorkshopApp", "FirstAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextBoxesAndInputsDemo", "TextBoxesAndInputsDemo\TextBoxesAndInputsDemo.csproj", "{306722E4-1E44-4F11-A441-CBD7643DA970}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRentalCustomerApp", "VideoRentalCustomerApp\VideoRentalCustomerApp.csproj", "{35AAC73D-E192-4588-ADF6-96356139801B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{306722E4-1E44-4F11-A441-CBD7643DA970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{306722E4-1E44-4F11-A441-CBD7643DA970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{306722E4-1E44-4F11-A441-CBD7643DA970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35AAC73D-E192-4588-ADF6-96356139801B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35AAC73D-E192-4588-ADF6-96356139801B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35AAC73D-E192-4588-ADF6-96356139801B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35AAC73D-E192-4588-ADF6-96356139801B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

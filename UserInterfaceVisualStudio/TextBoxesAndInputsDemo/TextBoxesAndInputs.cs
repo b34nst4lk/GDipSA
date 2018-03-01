@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace TextBoxesAndInputs
 {
-    public partial class Form1 : Form
+    public partial class TextBoxesAndInputs : Form
     {
-        public Form1()
+        public TextBoxesAndInputs()
         {
             InitializeComponent();
         }

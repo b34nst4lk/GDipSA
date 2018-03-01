@@ -1,6 +1,6 @@
 ﻿namespace TextBoxesAndInputs
 {
-    partial class Form1
+    partial class TextBoxesAndInputs
     {
         /// <summary>
         /// Required designer variable.
